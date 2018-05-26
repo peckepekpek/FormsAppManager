@@ -44,8 +44,8 @@ public class FormsManagerFrame extends javax.swing.JFrame {
     private static String PASSWORD = "";
     private String FILE = ""; 
     private static final String RUTA_AMBITOS = "/aplicaciones/forms11g/conf/";
-    private static String RUTA_FORMSWEB = "/srv_apl/forms11g/middleware/user_projects/domains/dominioForms/config/fmwconfig/servers/WLS_FORMS/applications/formsapp_11.1.2/config/";
-    private static String RUTA_TNSNAMES = "/srv_apl/forms11g/middleware/forms_reports/config/";
+    private static final String RUTA_FORMSWEB = "/srv_apl/forms11g/middleware/user_projects/domains/dominioForms/config/fmwconfig/servers/WLS_FORMS/applications/formsapp_11.1.2/config/";
+    private static final String RUTA_TNSNAMES = "/srv_apl/forms11g/middleware/forms_reports/config/";
     private String RUTA_FILE = "";
     private ArrayList<String> FilesEncontrados = new ArrayList<String>();
     private static final String ENTER_KEY = "\n";
@@ -370,7 +370,7 @@ public class FormsManagerFrame extends javax.swing.JFrame {
         );
 
         versionLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        versionLabel.setText("Versión 1.0");
+        versionLabel.setText("Versión 1.01");
 
         javax.swing.GroupLayout versionPanelLayout = new javax.swing.GroupLayout(versionPanel);
         versionPanel.setLayout(versionPanelLayout);
