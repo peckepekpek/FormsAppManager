@@ -8,7 +8,6 @@ import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
 import gva.asa.forms.ssh.SSHConnector;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -19,13 +18,11 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 /*
@@ -118,10 +115,8 @@ public class FormsManagerFrame extends javax.swing.JFrame {
 
         pro_f11_int_rb.setText("Pro_Forms_11_Interno");
         pro_f11_int_rb.setToolTipText("");
-        pro_f11_int_rb.setEnabled(false);
 
         pro_f11_ext_rb.setText("Pro_Forms_11_Externo");
-        pro_f11_ext_rb.setEnabled(false);
 
         desa_f11_rb.setText("Desarrollo_Forms_11");
 
@@ -572,6 +567,20 @@ public class FormsManagerFrame extends javax.swing.JFrame {
         }
         if (desa_f11_rb.isSelected()) {
             String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(desa_f11_rb.getText()).split(",");
+            for (String server: servers) {
+              distribuyeFile(server);  
+              System.out.println(server);
+            }
+        }
+        if (pro_f11_int_rb.isSelected()) {
+            String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pro_f11_int_rb.getText()).split(",");
+            for (String server: servers) {
+              distribuyeFile(server);  
+              System.out.println(server);
+            }
+        }
+         if (pro_f11_ext_rb.isSelected()) {
+            String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pro_f11_ext_rb.getText()).split(",");
             for (String server: servers) {
               distribuyeFile(server);  
               System.out.println(server);

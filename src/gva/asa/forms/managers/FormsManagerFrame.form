@@ -134,13 +134,11 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Pro_Forms_11_Interno"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="pro_f11_ext_rb">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pro_Forms_11_Externo"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="desa_f11_rb">
