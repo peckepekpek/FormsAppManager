@@ -160,7 +160,6 @@ public class ThreadServer implements ServerListener {
     
     public void CompruebaLibrerias () {
         String command="for class in `echo \""+CLASSPATH_ENV+"\" | sed -e \"s/:/ /g\"`; do [ -f $class ] || echo \"$class no existe\" ; done";
-        System.out.println(command);
         runAsUsername(command,USERNAME_FORMS11);
     }
     
