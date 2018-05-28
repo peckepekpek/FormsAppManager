@@ -6,6 +6,10 @@
 package gva.asa.forms.managers.util;
 
 import java.awt.Color;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -14,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import javax.swing.text.DefaultCaret;
 
 /**
  *
@@ -28,8 +33,13 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
      */
     public EditorFrame() {
         initComponents();
+        startModule();
     }
 
+    public void startModule() {       
+            DefaultCaret caret = (DefaultCaret)logTextArea.getCaret();
+            caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,12 +89,14 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
 
         EntornosLabel.setText("Seleccione entorno:");
 
+        UsernameTF.setText("D20156833R");
         UsernameTF.setToolTipText("");
 
         UserLabel.setText("Usuario:");
 
         PassLabel.setText("Pass:");
 
+        PasswordF.setText("Nte%0p1a!");
         PasswordF.setToolTipText("");
 
         ServersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Servidores"));
@@ -409,6 +421,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     public void cambioEstadoProducido(String text) {
         if ((!(text.equals(hiloExec.PASSWORD+hiloExec.ENTER_KEY)))&&(!(text.startsWith("bash:")))&&(!(text.contains("sudo")))) {
             logTextArea.setText(text);
+            repaint();
             System.out.println(text);
         }
     }

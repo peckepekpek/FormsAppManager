@@ -5,6 +5,7 @@
  */
 package gva.asa.forms.managers;
 
+import gva.asa.forms.managers.util.EditorFrame;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.logging.Level;
@@ -38,19 +39,20 @@ public class Principal extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        Toolkit kit = Toolkit.getDefaultToolkit();
-//        Dimension tamanoPantalla = kit.getScreenSize();
-//        int alturaPantalla = tamanoPantalla.height;
-//        int anchuraPantalla = tamanoPantalla.width;
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension tamanoPantalla = kit.getScreenSize();
+        int alturaPantalla = tamanoPantalla.height;
+        int anchuraPantalla = tamanoPantalla.width;
         JMenuBar mb = new JMenuBar();
         JMenu menu1 = new JMenu("File");
         mb.add(menu1);
         JMenu menu2 = new JMenu("Help");
         mb.add(menu2);
-        FormsManagerFrame panel = new FormsManagerFrame();
+//        FormsManagerFrame panel = new FormsManagerFrame();
+        EditorFrame panel = new EditorFrame();
         panel.setJMenuBar(mb);
-//        panel.setIconImage(kit.getImage(getClass().getResource(java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString("icoGVA"))));
-//        panel.setLocation((anchuraPantalla-DEFAULT_WIDTH)/2,(alturaPantalla-DEFAULT_HEIGHT)/2);
+        panel.setIconImage(kit.getImage(getClass().getResource(java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString("icoGVA"))));
+        panel.setLocation((anchuraPantalla-DEFAULT_WIDTH)/2,(alturaPantalla-DEFAULT_HEIGHT)/2);
         panel.setVisible(true);
        
     }
