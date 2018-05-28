@@ -48,7 +48,6 @@ public class Principal extends Application{
         mb.add(menu1);
         JMenu menu2 = new JMenu("Help");
         mb.add(menu2);
-//        FormsManagerFrame panel = new FormsManagerFrame();
         EditorFrame panel = new EditorFrame();
         panel.setJMenuBar(mb);
         panel.setIconImage(kit.getImage(getClass().getResource(java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString("icoGVA"))));

@@ -6,10 +6,7 @@
 package gva.asa.forms.managers.util;
 
 import java.awt.Color;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.Toolkit;
 import java.util.regex.Pattern;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -34,6 +31,8 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
      */
     public EditorFrame() {
         initComponents();
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        this.setIconImage(kit.getImage(getClass().getResource(java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString("icoGVA"))));
         startModule();
     }
 
@@ -85,6 +84,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         versionLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Forms Manager");
 
         EditorPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Editor"));
 
@@ -464,8 +464,12 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     }
     
     private void distribuyeFile(String server) {
+        hiloExec.ERROR=0;
         hiloExec.HOST=server;
         guardar(EditorTextArea.getText());
+        if (hiloExec.ERROR==0) {
+            cambioEstadoProducido("Server:"+server+" Fichero "+hiloExec.FILE+" guardado OK");
+        }
     }
     
     
@@ -473,6 +477,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             hiloExec = new ThreadServer();
             hiloExec.addServerListener(this);
             newAmbitoButton.setEnabled(true);
+            newAmbitoTF.setText("");
             ServersPanel.removeAll();
             repaint();
             String entornoSeleccionado = EntornosComboBox.getSelectedItem().toString();
@@ -557,16 +562,11 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     }//GEN-LAST:event_newAmbitoButtonActionPerformed
 
     private void creaAmbito(String text) {
-        hiloExec.FILE=newAmbitoTF.getText();
-        hiloExec.ERROR=0;
-        hiloExec.subeFichero(text);
-        hiloExec.cambiaPropietarioForms();
-        hiloExec.grabaFicheroForms();
-        hiloExec.borraTemporalUser();
-        hiloExec.CompruebaLibrerias();
+        hiloExec.FILE = newAmbitoTF.getText();
+        hiloExec.creaAmbito(text);
         if (hiloExec.ERROR==0) {
             DistribuirButton.setEnabled(true);
-        }     
+        }
         finProceso();
     }
     
@@ -602,13 +602,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     }//GEN-LAST:event_guardarActionPerformed
 
      private void guardar(String text) {
-        hiloExec.ERROR=0;
-        hiloExec.backupFicheroForms();
-        hiloExec.subeFichero(text);
-        hiloExec.cambiaPropietarioForms();
-        hiloExec.grabaFicheroForms();
-        hiloExec.borraTemporalUser();
-        hiloExec.CompruebaLibrerias();
+        hiloExec.guardar(text);
         if (hiloExec.ERROR==0) {
             DistribuirButton.setEnabled(true);
         }
@@ -698,7 +692,6 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     @Override
     public void ficheroEditado(String text) {
         EditorTextArea.append(text);
-//        EditorTextArea.update(EditorTextArea.getGraphics());
     }
     
     public void finProceso() {

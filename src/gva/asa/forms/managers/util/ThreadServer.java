@@ -64,7 +64,19 @@ public class ThreadServer implements ServerListener {
         }
     
     }
+    public void creaAmbito (String text) {
+        ERROR=0;
+        subeFichero(text);
+        cambiaPropietarioForms();
+        grabaFicheroForms();
+        borraTemporalUser();
+        CompruebaLibrerias();
+        if (ERROR==0) {
+            escribeLog("Server:"+HOST+"->"+FILE+" Guardado OK"+ENTER_KEY);
+            informaEstado("Server:"+HOST+"->"+FILE+" Guardado OK"+ENTER_KEY);
+        }
     
+    }
      private void filesEncontrados (String sTexto) {
             FilesEncontrados = new ArrayList<>();
 	    // Ruta conocida
@@ -154,15 +166,15 @@ public class ThreadServer implements ServerListener {
     
     public void guardar(String text) {
         ERROR=0;
-        escribeLog("Server:"+HOST+" Haciendo copia de fichero:"+FILE+ENTER_KEY);
+        informaEstado("Server:"+HOST+" Haciendo copia de fichero:"+FILE+ENTER_KEY);
         backupFicheroForms();
-        escribeLog("Server:"+HOST+" Subiendo fichero con cambios:"+FILE+ENTER_KEY);
+        informaEstado("Server:"+HOST+" Subiendo fichero con cambios:"+FILE+ENTER_KEY);
         subeFichero(text);
-        escribeLog("Server:"+HOST+" Aplicando permisos Forms:"+FILE+ENTER_KEY);
+        informaEstado("Server:"+HOST+" Aplicando permisos Forms:"+FILE+ENTER_KEY);
         cambiaPropietarioForms();
-        escribeLog("Server:"+HOST+" Grabando fichero en destino:"+FILE+ENTER_KEY);
+        informaEstado("Server:"+HOST+" Grabando fichero en destino:"+FILE+ENTER_KEY);
         grabaFicheroForms();
-        escribeLog("Comprobando ficheros del ClassPath. Los siguientes ficheros no están:"+ENTER_KEY);
+        informaEstado("Comprobando ficheros del ClassPath. Los siguientes ficheros no están:"+ENTER_KEY);
         borraTemporalUser();
         CompruebaLibrerias();
         if (ERROR==0) {
@@ -278,7 +290,6 @@ public class ThreadServer implements ServerListener {
                 String line;
                 while ((line = br.readLine()) != null) 
                 {
-                    System.out.println(line);
                     informaCambioFile(line+ENTER_KEY);
                 }
                 br.close();
