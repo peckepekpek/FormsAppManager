@@ -155,14 +155,12 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
 
         EntornosLabel.setText("Seleccione entorno:");
 
-        UsernameTF.setText("D20156833R");
         UsernameTF.setToolTipText("");
 
         UserLabel.setText("Usuario:");
 
         PassLabel.setText("Pass:");
 
-        PasswordF.setText("Nte%0p1a!");
         PasswordF.setToolTipText("");
 
         ServersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Servidores"));
