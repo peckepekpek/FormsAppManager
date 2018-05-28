@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
@@ -49,6 +50,11 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        EditorPanel = new javax.swing.JPanel();
+        guardar = new javax.swing.JButton();
+        DistribuirButton = new javax.swing.JButton();
+        editorScrollPanel = new javax.swing.JScrollPane();
+        EditorTextArea = new javax.swing.JTextArea();
         EntornoPanel = new javax.swing.JPanel();
         EntornosComboBox = new javax.swing.JComboBox<>();
         ConsultaAmbitos = new javax.swing.JButton();
@@ -68,8 +74,66 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         newAmbitoTF = new javax.swing.JTextField();
         editButtonPanel = new javax.swing.JPanel();
         editFileButton = new javax.swing.JButton();
+        state = new javax.swing.JLabel();
+        DistribucionPanel = new javax.swing.JPanel();
+        pre_f11_int_rb = new javax.swing.JRadioButton();
+        pro_f11_int_rb = new javax.swing.JRadioButton();
+        pro_f11_ext_rb = new javax.swing.JRadioButton();
+        desa_f11_rb = new javax.swing.JRadioButton();
+        pre_f11_ext_rb = new javax.swing.JRadioButton();
+        versionPanel = new javax.swing.JPanel();
+        versionLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        EditorPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Editor"));
+
+        guardar.setText("Guardar");
+        guardar.setEnabled(false);
+        guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarActionPerformed(evt);
+            }
+        });
+
+        DistribuirButton.setText("Distribuir");
+        DistribuirButton.setToolTipText("");
+        DistribuirButton.setEnabled(false);
+        DistribuirButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DistribuirButtonActionPerformed(evt);
+            }
+        });
+
+        EditorTextArea.setColumns(20);
+        EditorTextArea.setRows(5);
+        editorScrollPanel.setViewportView(EditorTextArea);
+
+        javax.swing.GroupLayout EditorPanelLayout = new javax.swing.GroupLayout(EditorPanel);
+        EditorPanel.setLayout(EditorPanelLayout);
+        EditorPanelLayout.setHorizontalGroup(
+            EditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EditorPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(EditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(editorScrollPanel)
+                    .addGroup(EditorPanelLayout.createSequentialGroup()
+                        .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(DistribuirButton)))
+                .addContainerGap())
+        );
+        EditorPanelLayout.setVerticalGroup(
+            EditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EditorPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(editorScrollPanel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(EditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DistribuirButton)
+                    .addComponent(guardar))
+                .addContainerGap())
+        );
 
         EntornoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Entorno"));
 
@@ -107,7 +171,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         EntornoPanelLayout.setHorizontalGroup(
             EntornoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EntornoPanelLayout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(EntornoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(ConsultaAmbitos)
                     .addGroup(EntornoPanelLayout.createSequentialGroup()
@@ -143,7 +207,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ConsultaAmbitos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ServersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                .addComponent(ServersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -166,7 +230,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             OutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OutputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -199,20 +263,26 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             }
         });
 
+        state.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gva/asa/forms/resources/green_bole.png"))); // NOI18N
+
         javax.swing.GroupLayout editButtonPanelLayout = new javax.swing.GroupLayout(editButtonPanel);
         editButtonPanel.setLayout(editButtonPanelLayout);
         editButtonPanelLayout.setHorizontalGroup(
             editButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editButtonPanelLayout.createSequentialGroup()
-                .addGap(98, 98, 98)
+                .addContainerGap()
                 .addComponent(editFileButton)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(state)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         editButtonPanelLayout.setVerticalGroup(
             editButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editButtonPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(editFileButton)
+                .addGroup(editButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editFileButton)
+                    .addComponent(state))
                 .addContainerGap())
         );
 
@@ -223,10 +293,11 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             .addGroup(AmbitoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AmbitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AmbitoPanelLayout.createSequentialGroup()
+                        .addComponent(filePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addComponent(newAmbitoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editButtonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(filePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(editButtonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         AmbitoPanelLayout.setVerticalGroup(
             AmbitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,29 +310,112 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
                 .addContainerGap())
         );
 
+        DistribucionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel de Distribución"));
+
+        pre_f11_int_rb.setText("Pre_Forms_11_Interno");
+        pre_f11_int_rb.setToolTipText("");
+
+        pro_f11_int_rb.setText("Pro_Forms_11_Interno");
+        pro_f11_int_rb.setToolTipText("");
+
+        pro_f11_ext_rb.setText("Pro_Forms_11_Externo");
+
+        desa_f11_rb.setText("Desarrollo_Forms_11");
+
+        pre_f11_ext_rb.setText("Pre_Forms_11_Externo");
+        pre_f11_ext_rb.setToolTipText("");
+
+        javax.swing.GroupLayout DistribucionPanelLayout = new javax.swing.GroupLayout(DistribucionPanel);
+        DistribucionPanel.setLayout(DistribucionPanelLayout);
+        DistribucionPanelLayout.setHorizontalGroup(
+            DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DistribucionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(desa_f11_rb)
+                    .addComponent(pre_f11_int_rb)
+                    .addComponent(pre_f11_ext_rb)
+                    .addComponent(pro_f11_int_rb)
+                    .addComponent(pro_f11_ext_rb))
+                .addContainerGap(346, Short.MAX_VALUE))
+        );
+        DistribucionPanelLayout.setVerticalGroup(
+            DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DistribucionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(desa_f11_rb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pre_f11_int_rb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pre_f11_ext_rb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pro_f11_int_rb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pro_f11_ext_rb)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        versionLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        versionLabel.setText("Versión 1.03");
+        versionLabel.setToolTipText("");
+
+        javax.swing.GroupLayout versionPanelLayout = new javax.swing.GroupLayout(versionPanel);
+        versionPanel.setLayout(versionPanelLayout);
+        versionPanelLayout.setHorizontalGroup(
+            versionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, versionPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(versionLabel)
+                .addContainerGap())
+        );
+        versionPanelLayout.setVerticalGroup(
+            versionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, versionPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(versionLabel))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(OutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(EntornoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(EntornoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(AmbitoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(AmbitoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(OutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(versionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(EditorPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(DistribucionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EntornoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AmbitoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(OutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(EditorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(DistribucionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(versionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EntornoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(AmbitoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(OutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
@@ -271,9 +425,54 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_EntornosComboBoxActionPerformed
 
+    private void distribuyeCambios() {
+        if (pre_f11_int_rb.isSelected()) {
+            String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pre_f11_int_rb.getText()).split(",");
+            for (String server: servers) {
+              distribuyeFile(server);  
+              System.out.println(server);
+            }
+        }
+        if (pre_f11_ext_rb.isSelected()) {
+            String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pre_f11_ext_rb.getText()).split(",");
+            for (String server: servers) {
+              distribuyeFile(server);  
+              System.out.println(server);
+            }
+        }
+        if (desa_f11_rb.isSelected()) {
+            String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(desa_f11_rb.getText()).split(",");
+            for (String server: servers) {
+              distribuyeFile(server);  
+              System.out.println(server);
+            }
+        }
+        if (pro_f11_int_rb.isSelected()) {
+            String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pro_f11_int_rb.getText()).split(",");
+            for (String server: servers) {
+              distribuyeFile(server);  
+              System.out.println(server);
+            }
+        }
+         if (pro_f11_ext_rb.isSelected()) {
+            String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pro_f11_ext_rb.getText()).split(",");
+            for (String server: servers) {
+              distribuyeFile(server);  
+              System.out.println(server);
+            }
+        }
+    }
+    
+    private void distribuyeFile(String server) {
+        hiloExec.HOST=server;
+        guardar(EditorTextArea.getText());
+    }
+    
+    
     private void ConsultaAmbitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaAmbitosActionPerformed
             hiloExec = new ThreadServer();
             hiloExec.addServerListener(this);
+            newAmbitoButton.setEnabled(true);
             ServersPanel.removeAll();
             repaint();
             String entornoSeleccionado = EntornosComboBox.getSelectedItem().toString();
@@ -349,17 +548,72 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             filePanel.add(jpan);
             pack();
             editFileButton.setEnabled(true);
+            finProceso();
         
     }//GEN-LAST:event_ConsultaAmbitosActionPerformed
 
     private void newAmbitoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAmbitoButtonActionPerformed
-        
+        creaAmbito(EditorTextArea.getText());
     }//GEN-LAST:event_newAmbitoButtonActionPerformed
 
+    private void creaAmbito(String text) {
+        hiloExec.FILE=newAmbitoTF.getText();
+        hiloExec.ERROR=0;
+        hiloExec.subeFichero(text);
+        hiloExec.cambiaPropietarioForms();
+        hiloExec.grabaFicheroForms();
+        hiloExec.borraTemporalUser();
+        hiloExec.CompruebaLibrerias();
+        if (hiloExec.ERROR==0) {
+            DistribuirButton.setEnabled(true);
+        }     
+        finProceso();
+    }
+    
     private void editFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFileButtonActionPerformed
-        
+        guardar.setEnabled(true);
+        EditorTextArea.setText("");
+        logTextArea.setText("");
+        hiloExec.abreFichero();
+        DistribuirButton.setEnabled(false);
+        finProceso();
     }//GEN-LAST:event_editFileButtonActionPerformed
 
+    private void DistribuirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DistribuirButtonActionPerformed
+        
+        int response = JOptionPane.showConfirmDialog(this, "Está Seguro de distribuir el fichero "+hiloExec.FILE+" a los entornos seleccionados?", "Confirm",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        switch (response) {
+            case JOptionPane.YES_OPTION:
+                distribuyeCambios();
+                break;
+            case JOptionPane.CLOSED_OPTION:
+                System.out.println("JOptionPane closed");
+                break;
+            default:
+                break;
+        }
+        
+        
+    }//GEN-LAST:event_DistribuirButtonActionPerformed
+
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        guardar(EditorTextArea.getText());
+    }//GEN-LAST:event_guardarActionPerformed
+
+     private void guardar(String text) {
+        hiloExec.ERROR=0;
+        hiloExec.backupFicheroForms();
+        hiloExec.subeFichero(text);
+        hiloExec.cambiaPropietarioForms();
+        hiloExec.grabaFicheroForms();
+        hiloExec.borraTemporalUser();
+        hiloExec.CompruebaLibrerias();
+        if (hiloExec.ERROR==0) {
+            DistribuirButton.setEnabled(true);
+        }
+        finProceso();
+    }
     /**
      * @param args the command line arguments
      */
@@ -398,6 +652,10 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AmbitoPanel;
     private javax.swing.JButton ConsultaAmbitos;
+    private javax.swing.JPanel DistribucionPanel;
+    private javax.swing.JButton DistribuirButton;
+    private javax.swing.JPanel EditorPanel;
+    private javax.swing.JTextArea EditorTextArea;
     private javax.swing.JPanel EntornoPanel;
     private javax.swing.JComboBox<String> EntornosComboBox;
     private javax.swing.JLabel EntornosLabel;
@@ -407,22 +665,45 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     private javax.swing.JPanel ServersPanel;
     private javax.swing.JLabel UserLabel;
     private javax.swing.JTextField UsernameTF;
+    private javax.swing.JRadioButton desa_f11_rb;
     private javax.swing.JPanel editButtonPanel;
     private javax.swing.JButton editFileButton;
+    private javax.swing.JScrollPane editorScrollPanel;
     private javax.swing.JPanel filePanel;
+    private javax.swing.JButton guardar;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTextArea logTextArea;
     private javax.swing.JButton newAmbitoButton;
     private javax.swing.JPanel newAmbitoPanel;
     private javax.swing.JTextField newAmbitoTF;
+    private javax.swing.JRadioButton pre_f11_ext_rb;
+    private javax.swing.JRadioButton pre_f11_int_rb;
+    private javax.swing.JRadioButton pro_f11_ext_rb;
+    private javax.swing.JRadioButton pro_f11_int_rb;
+    private javax.swing.JLabel state;
+    private javax.swing.JLabel versionLabel;
+    private javax.swing.JPanel versionPanel;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void cambioEstadoProducido(String text) {
         if ((!(text.equals(hiloExec.PASSWORD+hiloExec.ENTER_KEY)))&&(!(text.startsWith("bash:")))&&(!(text.contains("sudo")))) {
-            logTextArea.setText(text);
-            repaint();
-            System.out.println(text);
+            logTextArea.append(text+hiloExec.ENTER_KEY);
+            logTextArea.update(logTextArea.getGraphics());
+            state.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gva/asa/forms/resources/red_bole.png")));
+            state.update(state.getGraphics());
         }
     }
+
+    @Override
+    public void ficheroEditado(String text) {
+        EditorTextArea.append(text);
+//        EditorTextArea.update(EditorTextArea.getGraphics());
+    }
+    
+    public void finProceso() {
+        state.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gva/asa/forms/resources/green_bole.png")));
+        state.update(state.getGraphics());
+    }
+
 }

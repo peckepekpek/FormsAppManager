@@ -5,9 +5,19 @@
  */
 package gva.asa.forms.managers.util;
 
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.SftpException;
 import gva.asa.forms.ssh.SSHConnector;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 /**
@@ -31,7 +41,6 @@ public class ThreadServer implements ServerListener {
     public String CLASSPATH_ENV="";
     public int ERROR=0;
     private ListenerList ServerListenerList = new ListenerList();
-   
     
     @Override
     public void cambioEstadoProducido(String tipo) {
@@ -69,7 +78,7 @@ public class ThreadServer implements ServerListener {
     }
 
     private void escribeLog(String message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(message);
     }
     
     public void addServerListener(ServerListener listener)
@@ -85,4 +94,207 @@ public class ThreadServer implements ServerListener {
                         listener.cambioEstadoProducido(texto);
 		}
 	}
+    
+    public void informaCambioFile(String texto)
+	{
+		int listenerSize = ServerListenerList.size();
+		for (int n=0; n<listenerSize; n++) {
+			ServerListener listener = (ServerListener)ServerListenerList.get(n);
+                        listener.ficheroEditado(texto);
+		}
+	}
+    
+    public void abreFichero () {      
+        CLASSPATH_ENV="";
+        preCopiaFichero();
+        cambiaPropietarioDownload();
+        informaEstado("Abriendo fichero:"+FILE+ENTER_KEY);
+        cogeFichero("/tmp/"+FILE);
+        borraTemporal();
+        informaEstado("Fin de proceso. Fichero abierto:"+FILE+ENTER_KEY);
+    }
+    
+     public void preCopiaFichero () {
+        String remoteFile=RUTA_FILE+FILE;
+        String command="cp "+remoteFile+ " /tmp/"+FILE;
+        runAsUsername(command, USERNAME_FORMS11); 
+    }
+    
+    private void borraTemporal() {
+        String command="rm -rf /tmp/"+FILE;
+        runAsUsername(command,USERNAME_FORMS11);
+    }
+     
+     public void cambiaPropietarioDownload() {
+        String command="chmod 777 /tmp/"+FILE;
+        runAsUsername(command,USERNAME_FORMS11);
+    }
+     
+     public void cambiaPropietarioForms() {
+        String command="sudo chown forms11g:forms11g /tmp/"+FILE;
+        runAsUsername(command,USERNAME);
+    }
+    
+    public void grabaFicheroForms() {
+        String remoteFile=RUTA_FILE+FILE;
+        String command="cp /tmp/"+FILE+" "+remoteFile;
+        runAsUsername(command,USERNAME_FORMS11);
+    }
+    
+    public void borraTemporalUser() {
+        String command="rm -rf /tmp/"+FILE;
+        runAsUsername(command,USERNAME);
+    }
+    
+    public void CompruebaLibrerias () {
+        String command="for class in `echo \""+CLASSPATH_ENV+"\" | sed -e \"s/:/ /g\"`; do [ -f $class ] || echo \"$class no existe\" ; done";
+        System.out.println(command);
+        runAsUsername(command,USERNAME_FORMS11);
+    }
+    
+    public void guardar(String text) {
+        ERROR=0;
+        escribeLog("Server:"+HOST+" Haciendo copia de fichero:"+FILE+ENTER_KEY);
+        backupFicheroForms();
+        escribeLog("Server:"+HOST+" Subiendo fichero con cambios:"+FILE+ENTER_KEY);
+        subeFichero(text);
+        escribeLog("Server:"+HOST+" Aplicando permisos Forms:"+FILE+ENTER_KEY);
+        cambiaPropietarioForms();
+        escribeLog("Server:"+HOST+" Grabando fichero en destino:"+FILE+ENTER_KEY);
+        grabaFicheroForms();
+        escribeLog("Comprobando ficheros del ClassPath. Los siguientes ficheros no están:"+ENTER_KEY);
+        borraTemporalUser();
+        CompruebaLibrerias();
+        if (ERROR==0) {
+            escribeLog("Server:"+HOST+" Guardado OK"+ENTER_KEY);
+            informaEstado("Server:"+HOST+" Guardado OK"+ENTER_KEY);
+        }
+    
+    }
+    
+     public void backupFicheroForms () {
+        String remoteFile=RUTA_FILE+FILE;
+        String command="cp "+remoteFile+ " "+RUTA_AMBITOS+"backup/";
+        runAsUsername(command,USERNAME_FORMS11); 
+    }
+    
+     public void subeFichero(String text) {             
+         try
+            {
+                InputStream in= new ByteArrayInputStream(text.getBytes());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                String line;
+                while ((line = reader.readLine()) != null) 
+                {
+                    if (line.startsWith("CLASSPATH=")) {CLASSPATH_ENV=line.substring(10);}
+                }       
+                JSch jsch = new JSch();
+                Session session = jsch.getSession(USERNAME, HOST, PORT);
+                session.setPassword(PASSWORD);
+                session.setConfig("StrictHostKeyChecking", "no");
+                System.out.println("Establishing Connection...");
+                session.connect();
+                System.out.println("Connection established with USER."+USERNAME);
+                System.out.println("Creating SFTP Channel.");
+                ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
+                System.out.println("Ususario sftp:"+session.getUserName());
+                sftpChannel.connect();
+                System.out.println("SFTP Channel created.");
+                in= new ByteArrayInputStream(text.getBytes());
+                sftpChannel.cd("/tmp");
+                sftpChannel.put(in,FILE);
+                sftpChannel.chmod(509, "/tmp/"+FILE);
+                sftpChannel.disconnect();
+                session.disconnect();  
+            }
+            catch(JSchException | SftpException | IOException ex)
+            {
+                System.out.println(ex);
+                escribeLog(ex.getMessage()+":"+ex);
+                ERROR++;
+            }
+    
+    }
+    
+     public void runAsUsername (String command, String useras) {
+        try
+            {
+                JSch jsch = new JSch();
+                Session session = jsch.getSession(USERNAME, HOST, PORT);
+                session.setPassword(PASSWORD);
+                session.setConfig("StrictHostKeyChecking", "no");
+                informaEstado("Establishing Connection...");
+                session.connect();
+                informaEstado("Connection established with USER."+USERNAME);
+                // Abrimos un canal SSH. Es como abrir una consola.
+                ChannelExec channelExec = (ChannelExec) session.
+                    openChannel("exec");
+                InputStream in = channelExec.getInputStream();
+                OutputStream out=channelExec.getOutputStream();
+                // Ejecutamos el comando para ser forms11g.
+                ((ChannelExec) channelExec).setPty(true);
+                ((ChannelExec)channelExec).setCommand("sudo su - "+useras+" -c '"+command+"'");
+                channelExec.connect();
+                out.write((PASSWORD+"\n").getBytes());
+                out.flush();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                StringBuilder builder = new StringBuilder();
+                String linea;
+                while ((linea = reader.readLine()) != null) {
+                    builder.append(linea);
+                    builder.append(ENTER_KEY);
+                    informaEstado(linea+ENTER_KEY);
+                }
+                // Cerramos el canal SSH.
+            channelExec.disconnect();
+            System.out.println("Connection closed with USER."+USERNAME);
+         }
+        catch(JSchException | IOException ex)
+        {
+            System.out.println(ex);
+            escribeLog(ex.getMessage()+":"+ex);
+            ERROR++;
+        }
+        
+    }
+     
+     public void cogeFichero(String remoteFile) {
+         try
+            {
+                JSch jsch = new JSch();
+                Session session = jsch.getSession(USERNAME, HOST, PORT);
+                session.setPassword(PASSWORD);
+                session.setConfig("StrictHostKeyChecking", "no");
+                System.out.println("Establishing Connection...");
+                session.connect();
+                System.out.println("Connection established.");
+                System.out.println("Creating SFTP Channel.");
+                ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
+                sftpChannel.connect();
+                System.out.println("SFTP Channel created.");
+                InputStream out= null;
+                out= sftpChannel.get(remoteFile);
+                BufferedReader br = new BufferedReader(new InputStreamReader(out));
+                String line;
+                while ((line = br.readLine()) != null) 
+                {
+                    System.out.println(line);
+                    informaCambioFile(line+ENTER_KEY);
+                }
+                br.close();
+                sftpChannel.disconnect();
+                session.disconnect();
+            }
+            catch(JSchException | SftpException | IOException e)
+            {
+                System.out.println(e);
+                escribeLog(e.getMessage());   
+                ERROR++;
+            }
+    }
+
+    @Override
+    public void ficheroEditado(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
