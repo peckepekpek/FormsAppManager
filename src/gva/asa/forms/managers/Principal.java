@@ -5,7 +5,6 @@
  */
 package gva.asa.forms.managers;
 
-import gva.asa.forms.managers.util.EditorFrame;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.logging.Level;

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gva.asa.forms.managers.util;
+package gva.asa.forms.managers;
 
+import gva.asa.forms.managers.util.ServerListener;
+import gva.asa.forms.managers.util.ThreadServer;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.util.regex.Pattern;
