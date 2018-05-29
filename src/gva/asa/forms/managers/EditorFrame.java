@@ -356,7 +356,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         );
 
         versionLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        versionLabel.setText("Versión 1.03");
+        versionLabel.setText("Versión 1.04");
         versionLabel.setToolTipText("");
 
         javax.swing.GroupLayout versionPanelLayout = new javax.swing.GroupLayout(versionPanel);
@@ -472,6 +472,20 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         }
     }
     
+    private void addRadioButtonFile (String nombreFichero, ButtonGroup b, JPanel panel, String RutaFile) {
+         JRadioButton a = new JRadioButton(nombreFichero);
+            a.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    String a = evt.getActionCommand();
+                    hiloExec.RUTA_FILE = RutaFile;
+                    hiloExec.FILE = nombreFichero;
+                }
+            });
+            b.add(a);
+            panel.add(a);
+            a.setVisible(true);
+    
+    }
     
     private void ConsultaAmbitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaAmbitosActionPerformed
             hiloExec = new ThreadServer();
@@ -493,57 +507,23 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             ButtonGroup buttonFiles = new ButtonGroup();
 
             // FORMSWEB //
-
-            JRadioButton a = new JRadioButton("formsweb.cfg");
-            a.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    String a = evt.getActionCommand();
-                    hiloExec.RUTA_FILE = hiloExec.RUTA_FORMSWEB;
-                    hiloExec.FILE = "formsweb.cfg";
-                }
-            });
-            buttonFiles.add(a);
-            jpan.add(a);
-            a.setVisible(true);
+            addRadioButtonFile("formsweb.cfg",buttonFiles,jpan,hiloExec.RUTA_FORMSWEB);
             jpan.add(new JSeparator(SwingConstants.HORIZONTAL));
-
             // TNSNAMES //
-
-            JRadioButton c = new JRadioButton("tnsnames.ora");
-            c.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    String c = evt.getActionCommand();
-                    hiloExec.RUTA_FILE = hiloExec.RUTA_TNSNAMES;
-                    hiloExec.FILE = "tnsnames.ora";
-                }
-            });
-            buttonFiles.add(c);
-            jpan.add(c);
-            c.setVisible(true);
-            jpan.add(new JSeparator(SwingConstants.HORIZONTAL));
-
+            addRadioButtonFile("tnsnames.ora",buttonFiles,jpan,hiloExec.RUTA_TNSNAMES);
+            jpan.add(new JSeparator(SwingConstants.HORIZONTAL)); 
+             // WEBUTIL //
+            addRadioButtonFile("webutil.cfg",buttonFiles,jpan,hiloExec.RUTA_WEBUTIL);
+            jpan.add(new JSeparator(SwingConstants.HORIZONTAL)); 
             // AMBITOS //
-            int i=0;
             for (String file: hiloExec.FilesEncontrados ) {
-                i++;
-                JRadioButton b = new JRadioButton(file);
-                b.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        String a = evt.getActionCommand();
-                        hiloExec.RUTA_FILE = hiloExec.RUTA_AMBITOS;
-                        hiloExec.FILE = a;
-                    }
-                });
-                buttonFiles.add(b);
-                jpan.add(b);
-                b.setVisible(true);
+                addRadioButtonFile(file,buttonFiles,jpan,hiloExec.RUTA_AMBITOS);
             }
-
             jpan.add(new JSeparator(SwingConstants.HORIZONTAL));
 
             JLabel Servidores = new JLabel("-  Servidores  del entorno  -");
             ServersPanel.add(Servidores);
-            i=0;
+            int i=0;
             for (String server: servers) {
                 JLabel lserver = new JLabel("     "+server);
                 if (i==0) lserver.setForeground(Color.BLUE);
