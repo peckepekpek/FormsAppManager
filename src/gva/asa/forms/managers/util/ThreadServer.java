@@ -159,6 +159,7 @@ public class ThreadServer implements ServerListener {
         runAsUsername(command,USERNAME);
     }
     
+    // Contribution by Jorge Peña (The Bash Crack)
     public void CompruebaLibrerias () {
         String command="for class in `echo \""+CLASSPATH_ENV+"\" | sed -e \"s/:/ /g\"`; do [ -f $class ] || echo \"$class no existe\" ; done";
         runAsUsername(command,USERNAME_FORMS11);
