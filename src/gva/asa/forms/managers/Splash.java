@@ -6,7 +6,7 @@
 /*
  * Splash.java
  *
- * Created on 23-jul-2009, 22:43:18
+ * @author Paco Arnau
  */
 
 package gva.asa.forms.managers;

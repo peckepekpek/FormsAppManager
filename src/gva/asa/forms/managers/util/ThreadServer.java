@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author farnauvi
+ * @author Paco Arnau
  */
 public class ThreadServer implements ServerListener {
     
