@@ -47,7 +47,14 @@ public class ThreadServer implements ServerListener {
     public void cambioEstadoProducido(String tipo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     
+    /**
+     * Método que muestra los ficheros .env de un ámbito
+     * @param host servidor
+     * @param user usuario
+     * @param pass contraseña
+     */
     public void consultaAmbitos(String host,String user, String pass) {
         try {
             informaEstado("Interrogando a "+host);
@@ -65,6 +72,11 @@ public class ThreadServer implements ServerListener {
         }
     
     }
+    
+    /**
+     * Crea el fichero .env de un ámbito. Inserta lo que en ese momento tenga la ventana de edición del documento
+     * @param text nombre de fichero a crear
+     */
     public void creaAmbito (String text) {
         ERROR=0;
         subeFichero(text);
@@ -78,6 +90,11 @@ public class ThreadServer implements ServerListener {
         }
     
     }
+    
+    /**
+     * Dado el listado de ficheros en un string, lo recorre para dejar en el array los distintos ficheros encontrados
+     * @param sTexto 
+     */
      private void filesEncontrados (String sTexto) {
             FilesEncontrados = new ArrayList<>();
 	    // Ruta conocida
@@ -90,15 +107,27 @@ public class ThreadServer implements ServerListener {
             }    
     }
 
+    /**
+     * Muestra el log por la salida estandar
+     * @param message 
+     */
     private void escribeLog(String message) {
         System.out.println(message);
     }
     
+    /**
+     * añade el hilo a la lista de threads a informar de los cambios de estado
+     * @param listener 
+     */
     public void addServerListener(ServerListener listener)
        {
                ServerListenerList.add(listener);
        }
     
+    /**
+     * Informa al panel para que muestre en la ventana de Log los distintos mensajes
+     * @param texto Texto a mostrar
+     */
     public void informaEstado(String texto)
 	{
 		int listenerSize = ServerListenerList.size();
@@ -108,6 +137,10 @@ public class ThreadServer implements ServerListener {
 		}
 	}
     
+    /**
+     * Informa de que se ha producido una edición de fichero
+     * @param texto Nombre del fichero
+     */
     public void informaCambioFile(String texto)
 	{
 		int listenerSize = ServerListenerList.size();
@@ -117,6 +150,9 @@ public class ThreadServer implements ServerListener {
 		}
 	}
     
+    /**
+     * Abre el fichero seleccionado
+     */
     public void abreFichero () {      
         CLASSPATH_ENV="";
         preCopiaFichero();
@@ -127,44 +163,71 @@ public class ThreadServer implements ServerListener {
         informaEstado("Fin de proceso. Fichero abierto:"+FILE+ENTER_KEY);
     }
     
-     public void preCopiaFichero () {
+    
+    /**
+     * Hace una copia del fichero a una carpeta temporal accesible al usuario que abre la aplicación y que se podrá descargar por sftp
+     */
+    public void preCopiaFichero () {
         String remoteFile=RUTA_FILE+FILE;
         String command="cp "+remoteFile+ " /tmp/"+FILE;
         runAsUsername(command, USERNAME_FORMS); 
     }
     
+    /**
+     * Borra el fichero temporal usado para los procesos de carga y descarga
+     */
     private void borraTemporal() {
         String command="rm -rf /tmp/"+FILE;
         runAsUsername(command,USERNAME_FORMS);
     }
-     
-     public void cambiaPropietarioDownload() {
+    
+    /**
+     * Cambia los permisos del fichero para que sean accesible al usuario que lo va a editar
+     */
+    public void cambiaPropietarioDownload() {
         String command="chmod 777 /tmp/"+FILE;
         runAsUsername(command,USERNAME_FORMS);
     }
-     
-     public void cambiaPropietarioForms() {
-        String command="sudo chown forms11g:forms11g /tmp/"+FILE;
+    
+    /**
+     * Hace propietario al usuario forms para que pueda ser interpretado por weblogic
+     */
+    public void cambiaPropietarioForms() {
+        String command="sudo chown "+USERNAME_FORMS+":"+USERNAME_FORMS+" /tmp/"+FILE;
         runAsUsername(command,USERNAME);
     }
     
+    /**
+     * Graba fichero desde la ruta temporal a la ruta correcta definitiva
+     */
     public void grabaFicheroForms() {
         String remoteFile=RUTA_FILE+FILE;
         String command="cp /tmp/"+FILE+" "+remoteFile;
         runAsUsername(command,USERNAME_FORMS);
     }
     
+    /**
+     * Borra el fichero temporal del usuario empleado para la carga/descarga
+     */
     public void borraTemporalUser() {
         String command="rm -rf /tmp/"+FILE;
         runAsUsername(command,USERNAME);
     }
     
-    // Contribution by Jorge Peña (The Bash Crack)
+    /**
+     * Comprueba que existen las librerías especificadas en el CLASSPATH
+     * Contribution by Jorge Peña (The Bash Crack)
+     * 
+     */
     public void CompruebaLibrerias () {
         String command="for class in `echo \""+CLASSPATH_ENV+"\" | sed -e \"s/:/ /g\"`; do [ -f $class ] || echo \"$class no existe\" ; done";
         runAsUsername(command,USERNAME_FORMS);
     }
     
+    /**
+     * Guarda el fichero sujeto de edición
+     * @param text 
+     */
     public void guardar(String text) {
         ERROR=0;
         informaEstado("Server:"+HOST+" Haciendo copia de fichero:"+FILE+ENTER_KEY);
@@ -185,13 +248,20 @@ public class ThreadServer implements ServerListener {
     
     }
     
+    /**
+     * Hace una copia de seguridad del fichero en la carpeta  $ASA_CONF/backup
+     */
      public void backupFicheroForms () {
         String remoteFile=RUTA_FILE+FILE;
         String command="cp "+remoteFile+ " "+RUTA_AMBITOS+"backup/";
         runAsUsername(command,USERNAME_FORMS); 
     }
     
-     public void subeFichero(String text) {             
+    /**
+     * Sube el fichero a una carpeta temporal
+     * @param text nombre del fichero
+     */ 
+    public void subeFichero(String text) {             
          try
             {
                 InputStream in= new ByteArrayInputStream(text.getBytes());
@@ -228,8 +298,12 @@ public class ThreadServer implements ServerListener {
             }
     
     }
-    
-     public void runAsUsername (String command, String useras) {
+    /**
+     * Ejecuta un determinado comando como un determinado usuario
+     * @param command comando a ejecutar
+     * @param useras usuario de ejecución
+     */
+    public void runAsUsername (String command, String useras) {
         try
             {
                 JSch jsch = new JSch();
@@ -270,8 +344,12 @@ public class ThreadServer implements ServerListener {
         }
         
     }
-     
-     public void cogeFichero(String remoteFile) {
+    
+    /**
+     * Coge el fichero remoto por sftp
+     * @param remoteFile nombre del fichero
+     */
+    public void cogeFichero(String remoteFile) {
          try
             {
                 JSch jsch = new JSch();
@@ -310,6 +388,10 @@ public class ThreadServer implements ServerListener {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    /**
+     * Configura la version de forms (11 o 12) para definir parámetros de rutas y usuarios generales de la aplicación
+     * @param version 
+     */
     public void configuraVersionForms (String version) {
         if (version.contains("11")) {
             USERNAME_FORMS = "forms11g";

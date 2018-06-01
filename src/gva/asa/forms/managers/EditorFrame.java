@@ -38,6 +38,9 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         startModule();
     }
 
+    /**
+     * Recomendacion para el refresco del log
+     */
     public void startModule() {       
             DefaultCaret caret = (DefaultCaret)logTextArea.getCaret();
             caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);        
@@ -389,7 +392,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         );
 
         versionLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        versionLabel.setText("Versión 1.05");
+        versionLabel.setText("Versión 1.06");
         versionLabel.setToolTipText("");
 
         javax.swing.GroupLayout versionPanelLayout = new javax.swing.GroupLayout(versionPanel);
@@ -457,7 +460,9 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     private void EntornosComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EntornosComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EntornosComboBoxActionPerformed
-
+    /**
+     *  Distribuye los cambios editados al entorno seleccionado 
+     */
     private void distribuyeCambios() {
         if (pre_f11_int_rb.isSelected()) {
             String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pre_f11_int_rb.getText()).split(",");
@@ -515,7 +520,10 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             }
         }
     }
-    
+    /**
+     * Distribuye en un determinado servidor el fichero recién editado
+     * @param server servidor destino
+     */
     private void distribuyeFile(String server) {
         hiloExec.ERROR=0;
         hiloExec.HOST=server;
@@ -525,6 +533,13 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         }
     }
     
+    /**
+     * Añade un fichero de ambito al panel de seleccion de ficheros
+     * @param nombreFichero nombre de fichero a añadir
+     * @param b grupo de botones al que añadir el radio button
+     * @param panel panel al que añadir el botón
+     * @param RutaFile Ruta del fichero
+     */
     private void addRadioButtonFile (String nombreFichero, ButtonGroup b, JPanel panel, String RutaFile) {
          JRadioButton a = new JRadioButton(nombreFichero);
             a.addActionListener(new java.awt.event.ActionListener() {
@@ -540,10 +555,18 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     
     }
     
+    /**
+     * Configura la versión de forms dependiente del entorno seleccionado
+     * @param entornoSeleccionado entorno seleccionado
+     */
     private void seteaVersionForms(String entornoSeleccionado) {
             this.hiloExec.configuraVersionForms(entornoSeleccionado);
     }
     
+    /**
+     * Inicio de la aplicación: Consulta los ficheros del entorno forms seleccionado
+     * @param evt 
+     */
     private void ConsultaAmbitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaAmbitosActionPerformed
             hiloExec = new ThreadServer();
             hiloExec.addServerListener(this);
@@ -594,11 +617,18 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             finProceso();
         
     }//GEN-LAST:event_ConsultaAmbitosActionPerformed
-
+    /**
+     * Crea un ámbito nuevo con el nombre de fichero insertado en el cuadro de texto
+     * @param evt 
+     */
     private void newAmbitoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newAmbitoButtonActionPerformed
         creaAmbito(EditorTextArea.getText());
     }//GEN-LAST:event_newAmbitoButtonActionPerformed
-
+    
+    /**
+     * Invoca al hilo de ejecución para crear el ámbito
+     * @param text nombre del fichero a crear
+     */
     private void creaAmbito(String text) {
         hiloExec.FILE = newAmbitoTF.getText();
         hiloExec.creaAmbito(text);
@@ -608,6 +638,10 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         finProceso();
     }
     
+    /**
+     * Edita el fichero seleccionado
+     * @param evt 
+     */
     private void editFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFileButtonActionPerformed
         guardar.setEnabled(true);
         EditorTextArea.setText("");
@@ -616,7 +650,11 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         DistribuirButton.setEnabled(false);
         finProceso();
     }//GEN-LAST:event_editFileButtonActionPerformed
-
+    
+    /**
+     * Distribuye los cambios realizados en el fichero seleccionado
+     * @param evt 
+     */
     private void DistribuirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DistribuirButtonActionPerformed
         
         int response = JOptionPane.showConfirmDialog(this, "Está Seguro de distribuir el fichero "+hiloExec.FILE+" a los entornos seleccionados?", "Confirm",
@@ -634,7 +672,11 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         
         
     }//GEN-LAST:event_DistribuirButtonActionPerformed
-
+    
+    /**
+     * Guarda el fichero editado
+     * @param evt 
+     */
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         guardar(EditorTextArea.getText());
     }//GEN-LAST:event_guardarActionPerformed
@@ -642,8 +684,12 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     private void desa_f12_rbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desa_f12_rbActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_desa_f12_rbActionPerformed
-
-     private void guardar(String text) {
+    
+    /**
+     * Invoca al hilo de ejecución para guardar el fichero
+     * @param text 
+     */
+    private void guardar(String text) {
         hiloExec.guardar(text);
         if (hiloExec.ERROR==0) {
             DistribuirButton.setEnabled(true);
@@ -651,6 +697,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         finProceso();
     }
     /**
+     * Método principal
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -724,6 +771,10 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     private javax.swing.JPanel versionPanel;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     *
+     * @param text Muestra el texto en la ventana de registro
+     */
     @Override
     public void cambioEstadoProducido(String text) {
         if ((!(text.equals(hiloExec.PASSWORD+hiloExec.ENTER_KEY)))&&(!(text.startsWith("bash:")))&&(!(text.contains("sudo")))) {
@@ -734,11 +785,18 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         }
     }
 
-    @Override
+    /**
+     *
+     * @param text Añade el texto en la ventana de edicion de fichero
+     */
+    @Override 
     public void ficheroEditado(String text) {
         EditorTextArea.append(text);
     }
     
+    /**
+     * Informa de que ha finalizado el proceso de subida/bajada/edicion de fichero.
+     */
     public void finProceso() {
         state.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gva/asa/forms/resources/green_bole.png")));
         state.update(state.getGraphics());
