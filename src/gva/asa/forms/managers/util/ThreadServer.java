@@ -117,7 +117,7 @@ public class ThreadServer implements ServerListener {
     
     /**
      * añade el hilo a la lista de threads a informar de los cambios de estado
-     * @param listener 
+     * @param listener listener a añadir
      */
     public void addServerListener(ServerListener listener)
        {
@@ -226,7 +226,7 @@ public class ThreadServer implements ServerListener {
     
     /**
      * Guarda el fichero sujeto de edición
-     * @param text 
+     * @param text nombre de fichero a editar
      */
     public void guardar(String text) {
         ERROR=0;
@@ -390,7 +390,7 @@ public class ThreadServer implements ServerListener {
     
     /**
      * Configura la version de forms (11 o 12) para definir parámetros de rutas y usuarios generales de la aplicación
-     * @param version 
+     * @param version entorno seleccionado
      */
     public void configuraVersionForms (String version) {
         if (version.contains("11")) {

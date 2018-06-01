@@ -63,7 +63,7 @@ public class SSHConnector {
      *
      * @param command Comando SSH a ejecutar.
      *
-     * @return
+     * @return Texto resultado de la ejecución del comando
      *
      * @throws IllegalAccessException Excepción lanzada cuando no hay
      *                                conexión establecida.
