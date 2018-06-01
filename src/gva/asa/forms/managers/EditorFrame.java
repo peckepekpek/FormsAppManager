@@ -82,6 +82,9 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         pro_f11_ext_rb = new javax.swing.JRadioButton();
         desa_f11_rb = new javax.swing.JRadioButton();
         pre_f11_ext_rb = new javax.swing.JRadioButton();
+        desa_f12_rb = new javax.swing.JRadioButton();
+        pre_f12_rb = new javax.swing.JRadioButton();
+        pro_f12_rb = new javax.swing.JRadioButton();
         versionPanel = new javax.swing.JPanel();
         versionLabel = new javax.swing.JLabel();
 
@@ -139,7 +142,9 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
 
         EntornoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Entorno"));
 
-        EntornosComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Desarrollo_Forms_11", "Pre_Forms_11_Interno", "Pre_Forms_11_Externo", "Pro_Forms_11_Interno", "Pro_Forms_11_Externo" }));
+        EntornosComboBox.setEditable(true);
+        EntornosComboBox.setMaximumRowCount(9);
+        EntornosComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Desarrollo_Forms_11", "Pre_Forms_11_Interno", "Pre_Forms_11_Externo", "Pro_Forms_11_Interno", "Pro_Forms_11_Externo", "Desarrollo_Forms_12", "Pre_Forms_12", "Pro_Forms_12" }));
         EntornosComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EntornosComboBoxActionPerformed(evt);
@@ -325,6 +330,19 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         pre_f11_ext_rb.setText("Pre_Forms_11_Externo");
         pre_f11_ext_rb.setToolTipText("");
 
+        desa_f12_rb.setText("Desarrollo_Forms_12");
+        desa_f12_rb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desa_f12_rbActionPerformed(evt);
+            }
+        });
+
+        pre_f12_rb.setText("Pre_Forms_12");
+        pre_f12_rb.setToolTipText("");
+
+        pro_f12_rb.setText("Pro_Forms_12");
+        pro_f12_rb.setToolTipText("");
+
         javax.swing.GroupLayout DistribucionPanelLayout = new javax.swing.GroupLayout(DistribucionPanel);
         DistribucionPanel.setLayout(DistribucionPanelLayout);
         DistribucionPanelLayout.setHorizontalGroup(
@@ -332,22 +350,37 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             .addGroup(DistribucionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(desa_f11_rb)
-                    .addComponent(pre_f11_int_rb)
-                    .addComponent(pre_f11_ext_rb)
                     .addComponent(pro_f11_int_rb)
-                    .addComponent(pro_f11_ext_rb))
-                .addContainerGap(346, Short.MAX_VALUE))
+                    .addComponent(pro_f11_ext_rb)
+                    .addGroup(DistribucionPanelLayout.createSequentialGroup()
+                        .addGroup(DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(desa_f11_rb)
+                            .addComponent(pre_f11_int_rb)
+                            .addComponent(pre_f11_ext_rb))
+                        .addGap(68, 68, 68)
+                        .addGroup(DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(desa_f12_rb)
+                            .addComponent(pre_f12_rb)
+                            .addComponent(pro_f12_rb))))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         DistribucionPanelLayout.setVerticalGroup(
             DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DistribucionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(desa_f11_rb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pre_f11_int_rb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pre_f11_ext_rb)
+                .addGroup(DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DistribucionPanelLayout.createSequentialGroup()
+                        .addComponent(desa_f11_rb)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pre_f11_int_rb)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pre_f11_ext_rb))
+                    .addGroup(DistribucionPanelLayout.createSequentialGroup()
+                        .addComponent(desa_f12_rb)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pre_f12_rb)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pro_f12_rb)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pro_f11_int_rb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -356,7 +389,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         );
 
         versionLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        versionLabel.setText("Versión 1.04");
+        versionLabel.setText("Versión 1.05");
         versionLabel.setToolTipText("");
 
         javax.swing.GroupLayout versionPanelLayout = new javax.swing.GroupLayout(versionPanel);
@@ -460,6 +493,26 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
               distribuyeFile(server);  
               System.out.println(server);
             }
+        }if (desa_f12_rb.isSelected()) {
+            String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(desa_f12_rb.getText()).split(",");
+            for (String server: servers) {
+              distribuyeFile(server);  
+              System.out.println(server);
+            }
+        }
+        if (pre_f12_rb.isSelected()) {
+            String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pre_f12_rb.getText()).split(",");
+            for (String server: servers) {
+              distribuyeFile(server);  
+              System.out.println(server);
+            }
+        }
+         if (pro_f12_rb.isSelected()) {
+            String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pro_f12_rb.getText()).split(",");
+            for (String server: servers) {
+              distribuyeFile(server);  
+              System.out.println(server);
+            }
         }
     }
     
@@ -487,6 +540,10 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     
     }
     
+    private void seteaVersionForms(String entornoSeleccionado) {
+            this.hiloExec.configuraVersionForms(entornoSeleccionado);
+    }
+    
     private void ConsultaAmbitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaAmbitosActionPerformed
             hiloExec = new ThreadServer();
             hiloExec.addServerListener(this);
@@ -495,6 +552,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             ServersPanel.removeAll();
             repaint();
             String entornoSeleccionado = EntornosComboBox.getSelectedItem().toString();
+            seteaVersionForms(entornoSeleccionado);
             System.out.println(entornoSeleccionado);
             String separador = Pattern.quote(",");
             String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(entornoSeleccionado).split(separador);
@@ -581,6 +639,10 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         guardar(EditorTextArea.getText());
     }//GEN-LAST:event_guardarActionPerformed
 
+    private void desa_f12_rbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desa_f12_rbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_desa_f12_rbActionPerformed
+
      private void guardar(String text) {
         hiloExec.guardar(text);
         if (hiloExec.ERROR==0) {
@@ -640,6 +702,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     private javax.swing.JLabel UserLabel;
     private javax.swing.JTextField UsernameTF;
     private javax.swing.JRadioButton desa_f11_rb;
+    private javax.swing.JRadioButton desa_f12_rb;
     private javax.swing.JPanel editButtonPanel;
     private javax.swing.JButton editFileButton;
     private javax.swing.JScrollPane editorScrollPanel;
@@ -652,8 +715,10 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     private javax.swing.JTextField newAmbitoTF;
     private javax.swing.JRadioButton pre_f11_ext_rb;
     private javax.swing.JRadioButton pre_f11_int_rb;
+    private javax.swing.JRadioButton pre_f12_rb;
     private javax.swing.JRadioButton pro_f11_ext_rb;
     private javax.swing.JRadioButton pro_f11_int_rb;
+    private javax.swing.JRadioButton pro_f12_rb;
     private javax.swing.JLabel state;
     private javax.swing.JLabel versionLabel;
     private javax.swing.JPanel versionPanel;

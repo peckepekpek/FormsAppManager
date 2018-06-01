@@ -27,15 +27,15 @@ import java.util.ArrayList;
 public class ThreadServer implements ServerListener {
     
     public static String USERNAME = "";
-    public static final String USERNAME_FORMS11 = "forms11g";
     public static String HOST = "";
     public static final int PORT = 22;
     public static String PASSWORD = "";
     public String FILE = ""; 
-    public static final String RUTA_AMBITOS = "/aplicaciones/forms11g/conf/";
-    public static final String RUTA_FORMSWEB = "/srv_apl/forms11g/middleware/user_projects/domains/dominioForms/config/fmwconfig/servers/WLS_FORMS/applications/formsapp_11.1.2/config/";
-    public static final String RUTA_TNSNAMES = "/srv_apl/forms11g/middleware/forms_reports/config/";
-    public static final String RUTA_WEBUTIL = "/srv_apl/forms11g/middleware/forms_reports/config/FormsComponent/forms/server/";
+    public String USERNAME_FORMS = "";
+    public String RUTA_AMBITOS = "";
+    public String RUTA_FORMSWEB = "";
+    public String RUTA_TNSNAMES = "";
+    public String RUTA_WEBUTIL = "";
     public String RUTA_FILE = "";
     public ArrayList<String> FilesEncontrados = new ArrayList<String>();
     public static final String ENTER_KEY = "\n";
@@ -130,17 +130,17 @@ public class ThreadServer implements ServerListener {
      public void preCopiaFichero () {
         String remoteFile=RUTA_FILE+FILE;
         String command="cp "+remoteFile+ " /tmp/"+FILE;
-        runAsUsername(command, USERNAME_FORMS11); 
+        runAsUsername(command, USERNAME_FORMS); 
     }
     
     private void borraTemporal() {
         String command="rm -rf /tmp/"+FILE;
-        runAsUsername(command,USERNAME_FORMS11);
+        runAsUsername(command,USERNAME_FORMS);
     }
      
      public void cambiaPropietarioDownload() {
         String command="chmod 777 /tmp/"+FILE;
-        runAsUsername(command,USERNAME_FORMS11);
+        runAsUsername(command,USERNAME_FORMS);
     }
      
      public void cambiaPropietarioForms() {
@@ -151,7 +151,7 @@ public class ThreadServer implements ServerListener {
     public void grabaFicheroForms() {
         String remoteFile=RUTA_FILE+FILE;
         String command="cp /tmp/"+FILE+" "+remoteFile;
-        runAsUsername(command,USERNAME_FORMS11);
+        runAsUsername(command,USERNAME_FORMS);
     }
     
     public void borraTemporalUser() {
@@ -162,7 +162,7 @@ public class ThreadServer implements ServerListener {
     // Contribution by Jorge Peña (The Bash Crack)
     public void CompruebaLibrerias () {
         String command="for class in `echo \""+CLASSPATH_ENV+"\" | sed -e \"s/:/ /g\"`; do [ -f $class ] || echo \"$class no existe\" ; done";
-        runAsUsername(command,USERNAME_FORMS11);
+        runAsUsername(command,USERNAME_FORMS);
     }
     
     public void guardar(String text) {
@@ -188,7 +188,7 @@ public class ThreadServer implements ServerListener {
      public void backupFicheroForms () {
         String remoteFile=RUTA_FILE+FILE;
         String command="cp "+remoteFile+ " "+RUTA_AMBITOS+"backup/";
-        runAsUsername(command,USERNAME_FORMS11); 
+        runAsUsername(command,USERNAME_FORMS); 
     }
     
      public void subeFichero(String text) {             
@@ -308,5 +308,23 @@ public class ThreadServer implements ServerListener {
     @Override
     public void ficheroEditado(String text) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void configuraVersionForms (String version) {
+        if (version.contains("11")) {
+            USERNAME_FORMS = "forms11g";
+            RUTA_AMBITOS = "/aplicaciones/forms11g/conf/";
+            RUTA_FORMSWEB = "/srv_apl/forms11g/middleware/user_projects/domains/dominioForms/config/fmwconfig/servers/WLS_FORMS/applications/formsapp_11.1.2/config/";
+            RUTA_TNSNAMES = "/srv_apl/forms11g/middleware/forms_reports/config/";
+            RUTA_WEBUTIL = "/srv_apl/forms11g/middleware/forms_reports/config/FormsComponent/forms/server/";
+        } else if (version.contains("12")) {
+            USERNAME_FORMS = "forms12c";
+            RUTA_AMBITOS = "/aplicaciones/forms/conf/";
+            RUTA_FORMSWEB = "/srv_apl/forms12c/middleware/user_projects/domains/frsdomain/config/fmwconfig/servers/WLS_FORMS/applications/formsapp_12.2.1/config/";
+            RUTA_TNSNAMES = "/srv_apl/forms12c/middleware/network/admin/";
+            RUTA_WEBUTIL = "/srv_apl/forms12c/middleware/user_projects/domains/frsdomain/config/fmwconfig/components/FORMS/instances/forms1/server/";
+        
+        }
+        
     }
 }
