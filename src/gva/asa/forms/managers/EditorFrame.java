@@ -80,11 +80,13 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         editFileButton = new javax.swing.JButton();
         state = new javax.swing.JLabel();
         DistribucionPanel = new javax.swing.JPanel();
+        DistributionPanelForms11 = new javax.swing.JPanel();
+        desa_f11_rb = new javax.swing.JRadioButton();
         pre_f11_int_rb = new javax.swing.JRadioButton();
+        pre_f11_ext_rb = new javax.swing.JRadioButton();
         pro_f11_int_rb = new javax.swing.JRadioButton();
         pro_f11_ext_rb = new javax.swing.JRadioButton();
-        desa_f11_rb = new javax.swing.JRadioButton();
-        pre_f11_ext_rb = new javax.swing.JRadioButton();
+        jPanel2 = new javax.swing.JPanel();
         desa_f12_rb = new javax.swing.JRadioButton();
         pre_f12_rb = new javax.swing.JRadioButton();
         pro_f12_rb = new javax.swing.JRadioButton();
@@ -127,7 +129,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
                     .addComponent(editorScrollPanel)
                     .addGroup(EditorPanelLayout.createSequentialGroup()
                         .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
                         .addComponent(DistribuirButton)))
                 .addContainerGap())
         );
@@ -215,7 +217,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ConsultaAmbitos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ServersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                .addComponent(ServersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -236,9 +238,9 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         );
         OutputPanelLayout.setVerticalGroup(
             OutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OutputPanelLayout.createSequentialGroup()
+            .addGroup(OutputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -320,18 +322,56 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
 
         DistribucionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel de Distribución"));
 
+        DistributionPanelForms11.setBorder(javax.swing.BorderFactory.createTitledBorder("Forms 11"));
+
+        desa_f11_rb.setText("Desarrollo_Forms_11");
+
         pre_f11_int_rb.setText("Pre_Forms_11_Interno");
         pre_f11_int_rb.setToolTipText("");
+
+        pre_f11_ext_rb.setText("Pre_Forms_11_Externo");
+        pre_f11_ext_rb.setToolTipText("");
 
         pro_f11_int_rb.setText("Pro_Forms_11_Interno");
         pro_f11_int_rb.setToolTipText("");
 
         pro_f11_ext_rb.setText("Pro_Forms_11_Externo");
 
-        desa_f11_rb.setText("Desarrollo_Forms_11");
+        javax.swing.GroupLayout DistributionPanelForms11Layout = new javax.swing.GroupLayout(DistributionPanelForms11);
+        DistributionPanelForms11.setLayout(DistributionPanelForms11Layout);
+        DistributionPanelForms11Layout.setHorizontalGroup(
+            DistributionPanelForms11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DistributionPanelForms11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(desa_f11_rb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(DistributionPanelForms11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pre_f11_int_rb)
+                    .addComponent(pre_f11_ext_rb))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(DistributionPanelForms11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pro_f11_int_rb)
+                    .addComponent(pro_f11_ext_rb))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        DistributionPanelForms11Layout.setVerticalGroup(
+            DistributionPanelForms11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DistributionPanelForms11Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(DistributionPanelForms11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(desa_f11_rb)
+                    .addGroup(DistributionPanelForms11Layout.createSequentialGroup()
+                        .addComponent(pre_f11_int_rb)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pre_f11_ext_rb))
+                    .addGroup(DistributionPanelForms11Layout.createSequentialGroup()
+                        .addComponent(pro_f11_int_rb)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pro_f11_ext_rb)))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
 
-        pre_f11_ext_rb.setText("Pre_Forms_11_Externo");
-        pre_f11_ext_rb.setToolTipText("");
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Forms 12"));
 
         desa_f12_rb.setText("Desarrollo_Forms_12");
         desa_f12_rb.addActionListener(new java.awt.event.ActionListener() {
@@ -346,6 +386,30 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         pro_f12_rb.setText("Pro_Forms_12");
         pro_f12_rb.setToolTipText("");
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(desa_f12_rb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pre_f12_rb)
+                .addGap(52, 52, 52)
+                .addComponent(pro_f12_rb)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(desa_f12_rb)
+                    .addComponent(pre_f12_rb)
+                    .addComponent(pro_f12_rb))
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout DistribucionPanelLayout = new javax.swing.GroupLayout(DistribucionPanel);
         DistribucionPanel.setLayout(DistribucionPanelLayout);
         DistribucionPanelLayout.setHorizontalGroup(
@@ -353,46 +417,22 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             .addGroup(DistribucionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pro_f11_int_rb)
-                    .addComponent(pro_f11_ext_rb)
-                    .addGroup(DistribucionPanelLayout.createSequentialGroup()
-                        .addGroup(DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(desa_f11_rb)
-                            .addComponent(pre_f11_int_rb)
-                            .addComponent(pre_f11_ext_rb))
-                        .addGap(68, 68, 68)
-                        .addGroup(DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(desa_f12_rb)
-                            .addComponent(pre_f12_rb)
-                            .addComponent(pro_f12_rb))))
-                .addContainerGap(127, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(DistributionPanelForms11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(7, 7, 7))
         );
         DistribucionPanelLayout.setVerticalGroup(
             DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DistribucionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DistribucionPanelLayout.createSequentialGroup()
-                        .addComponent(desa_f11_rb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pre_f11_int_rb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pre_f11_ext_rb))
-                    .addGroup(DistribucionPanelLayout.createSequentialGroup()
-                        .addComponent(desa_f12_rb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pre_f12_rb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pro_f12_rb)))
+                .addComponent(DistributionPanelForms11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pro_f11_int_rb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pro_f11_ext_rb)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         versionLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        versionLabel.setText("Versión 1.06");
+        versionLabel.setText("Versión 1.07");
         versionLabel.setToolTipText("");
 
         javax.swing.GroupLayout versionPanelLayout = new javax.swing.GroupLayout(versionPanel);
@@ -400,7 +440,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         versionPanelLayout.setHorizontalGroup(
             versionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, versionPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(482, Short.MAX_VALUE)
                 .addComponent(versionLabel)
                 .addContainerGap())
         );
@@ -415,42 +455,39 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(EntornoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(AmbitoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(OutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(versionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(EditorPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(DistribucionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(EditorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(EntornoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(AmbitoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
+                        .addComponent(EditorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(OutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DistribucionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(versionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(EditorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(EntornoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AmbitoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(OutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(DistribucionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(versionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(EntornoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(AmbitoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(OutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(versionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -465,60 +502,77 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
      */
     private void distribuyeCambios() {
         if (pre_f11_int_rb.isSelected()) {
-            String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pre_f11_int_rb.getText()).split(",");
+            cambioEstadoProducido("################# Distribuyendo en "+pre_f11_int_rb.getText()+ " ###################################");
+            String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/pre_f11_int_rbresources/Bundle").getString(pre_f11_int_rb.getText()).split(",");
             for (String server: servers) {
               distribuyeFile(server);  
               System.out.println(server);
             }
+            cambioEstadoProducido("################# Fin de distribución en "+pre_f11_int_rb.getText()+ " ###################################");
         }
         if (pre_f11_ext_rb.isSelected()) {
+            cambioEstadoProducido("################# Distribuyendo en "+pre_f11_ext_rb.getText()+ " ###################################");
             String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pre_f11_ext_rb.getText()).split(",");
             for (String server: servers) {
               distribuyeFile(server);  
               System.out.println(server);
             }
+            cambioEstadoProducido("################# Fin de distribución en "+pre_f11_ext_rb.getText()+ " ###################################");
         }
         if (desa_f11_rb.isSelected()) {
+            cambioEstadoProducido("################# Distribuyendo en "+desa_f11_rb.getText()+ " ###################################");
             String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(desa_f11_rb.getText()).split(",");
             for (String server: servers) {
               distribuyeFile(server);  
               System.out.println(server);
             }
+            cambioEstadoProducido("################# Fin de distribución en "+desa_f11_rb.getText()+ " ###################################");
         }
         if (pro_f11_int_rb.isSelected()) {
+            cambioEstadoProducido("################# Distribuyendo en "+pro_f11_int_rb.getText()+ " ###################################");
             String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pro_f11_int_rb.getText()).split(",");
             for (String server: servers) {
               distribuyeFile(server);  
               System.out.println(server);
             }
+            cambioEstadoProducido("################# Fin de distribución en "+pro_f11_int_rb.getText()+ " ###################################");
         }
          if (pro_f11_ext_rb.isSelected()) {
+            cambioEstadoProducido("################# Distribuyendo en "+pro_f11_ext_rb.getText()+ " ###################################"); 
             String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pro_f11_ext_rb.getText()).split(",");
             for (String server: servers) {
               distribuyeFile(server);  
               System.out.println(server);
             }
+            cambioEstadoProducido("################# Fin de distribución en "+pro_f11_ext_rb.getText()+ " ###################################");
         }if (desa_f12_rb.isSelected()) {
+            cambioEstadoProducido("################# Distribuyendo en "+desa_f12_rb.getText()+ " ###################################"); 
             String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(desa_f12_rb.getText()).split(",");
             for (String server: servers) {
               distribuyeFile(server);  
               System.out.println(server);
             }
+            cambioEstadoProducido("################# Fin de distribución en "+desa_f12_rb.getText()+ " ###################################");
         }
         if (pre_f12_rb.isSelected()) {
+            cambioEstadoProducido("################# Distribuyendo en "+pre_f12_rb.getText()+ " ###################################"); 
             String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pre_f12_rb.getText()).split(",");
             for (String server: servers) {
               distribuyeFile(server);  
               System.out.println(server);
             }
+            cambioEstadoProducido("################# Fin de distribución en "+pre_f12_rb.getText()+ " ###################################");
         }
          if (pro_f12_rb.isSelected()) {
+            cambioEstadoProducido("################# Distribuyendo en "+pro_f12_rb.getText()+ " ###################################"); 
             String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pro_f12_rb.getText()).split(",");
             for (String server: servers) {
               distribuyeFile(server);  
               System.out.println(server);
             }
+            cambioEstadoProducido("################# Fin de distribución en "+pro_f12_rb.getText()+ " ###################################");
         }
+        finProceso();
     }
     /**
      * Distribuye en un determinado servidor el fichero recién editado
@@ -580,7 +634,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             String separador = Pattern.quote(",");
             String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(entornoSeleccionado).split(separador);
             ServersPanel.removeAll();
-            logTextArea.setText("");
+//            logTextArea.setText("");
             hiloExec.consultaAmbitos(servers[0],UsernameTF.getText(),PasswordF.getText());
             filePanel.removeAll();
             JPanel jpan = new JPanel();
@@ -645,7 +699,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     private void editFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFileButtonActionPerformed
         guardar.setEnabled(true);
         EditorTextArea.setText("");
-        logTextArea.setText("");
+//        logTextArea.setText("");
         hiloExec.abreFichero();
         DistribuirButton.setEnabled(false);
         finProceso();
@@ -737,6 +791,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     private javax.swing.JButton ConsultaAmbitos;
     private javax.swing.JPanel DistribucionPanel;
     private javax.swing.JButton DistribuirButton;
+    private javax.swing.JPanel DistributionPanelForms11;
     private javax.swing.JPanel EditorPanel;
     private javax.swing.JTextArea EditorTextArea;
     private javax.swing.JPanel EntornoPanel;
@@ -755,6 +810,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     private javax.swing.JScrollPane editorScrollPanel;
     private javax.swing.JPanel filePanel;
     private javax.swing.JButton guardar;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTextArea logTextArea;
     private javax.swing.JButton newAmbitoButton;

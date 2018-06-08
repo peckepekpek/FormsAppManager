@@ -50,14 +50,14 @@ public class ThreadServer implements ServerListener {
 
     
     /**
-     * Método que muestra los ficheros .env de un ámbito
+     * Método que muestra los ficheros .env de un servidor
      * @param host servidor
      * @param user usuario
      * @param pass contraseña
      */
     public void consultaAmbitos(String host,String user, String pass) {
         try {
-            informaEstado("Interrogando a "+host);
+            escribeLog("Interrogando a "+host);
             HOST = host;
             USERNAME = user;
             PASSWORD = pass;
@@ -68,7 +68,6 @@ public class ThreadServer implements ServerListener {
             filesEncontrados(result);
         } catch (JSchException | IllegalAccessException | IOException ex) {
             escribeLog(ex.getMessage());
-            System.out.println(ex.getMessage());
         }
     
     }
@@ -86,7 +85,6 @@ public class ThreadServer implements ServerListener {
         CompruebaLibrerias();
         if (ERROR==0) {
             escribeLog("Server:"+HOST+"->"+FILE+" Guardado OK"+ENTER_KEY);
-            informaEstado("Server:"+HOST+"->"+FILE+" Guardado OK"+ENTER_KEY);
         }
     
     }
@@ -113,6 +111,7 @@ public class ThreadServer implements ServerListener {
      */
     private void escribeLog(String message) {
         System.out.println(message);
+        informaEstado(message);
     }
     
     /**
@@ -243,7 +242,6 @@ public class ThreadServer implements ServerListener {
         CompruebaLibrerias();
         if (ERROR==0) {
             escribeLog("Server:"+HOST+" Guardado OK"+ENTER_KEY);
-            informaEstado("Server:"+HOST+" Guardado OK"+ENTER_KEY);
         }
     
     }
@@ -310,9 +308,9 @@ public class ThreadServer implements ServerListener {
                 Session session = jsch.getSession(USERNAME, HOST, PORT);
                 session.setPassword(PASSWORD);
                 session.setConfig("StrictHostKeyChecking", "no");
-                informaEstado("Establishing Connection...");
+//                informaEstado("Establishing Connection...");
                 session.connect();
-                informaEstado("Connection established with USER."+USERNAME);
+//                informaEstado("Connection established with USER."+USERNAME+" Comando a ejecutar:"+command);
                 // Abrimos un canal SSH. Es como abrir una consola.
                 ChannelExec channelExec = (ChannelExec) session.
                     openChannel("exec");
