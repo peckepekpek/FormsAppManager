@@ -328,6 +328,11 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
 
         pre_f11_int_rb.setText("Pre_Forms_11_Interno");
         pre_f11_int_rb.setToolTipText("");
+        pre_f11_int_rb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pre_f11_int_rbActionPerformed(evt);
+            }
+        });
 
         pre_f11_ext_rb.setText("Pre_Forms_11_Externo");
         pre_f11_ext_rb.setToolTipText("");
@@ -432,7 +437,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         );
 
         versionLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        versionLabel.setText("Versión 1.07");
+        versionLabel.setText("Versión 1.08");
         versionLabel.setToolTipText("");
 
         javax.swing.GroupLayout versionPanelLayout = new javax.swing.GroupLayout(versionPanel);
@@ -503,7 +508,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     private void distribuyeCambios() {
         if (pre_f11_int_rb.isSelected()) {
             cambioEstadoProducido("################# Distribuyendo en "+pre_f11_int_rb.getText()+ " ###################################");
-            String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/pre_f11_int_rbresources/Bundle").getString(pre_f11_int_rb.getText()).split(",");
+            String[] servers = java.util.ResourceBundle.getBundle("gva/asa/forms/resources/Bundle").getString(pre_f11_int_rb.getText()).split(",");
             for (String server: servers) {
               distribuyeFile(server);  
               System.out.println(server);
@@ -738,6 +743,10 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     private void desa_f12_rbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desa_f12_rbActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_desa_f12_rbActionPerformed
+
+    private void pre_f11_int_rbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pre_f11_int_rbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pre_f11_int_rbActionPerformed
     
     /**
      * Invoca al hilo de ejecución para guardar el fichero
