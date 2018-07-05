@@ -19,6 +19,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Properties;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -229,6 +233,7 @@ public class ThreadServer implements ServerListener {
      */
     public void guardar(String text) {
         ERROR=0;
+        text = procesaClassPath(text);
         informaEstado("Server:"+HOST+" Haciendo copia de fichero:"+FILE+ENTER_KEY);
         backupFicheroForms();
         informaEstado("Server:"+HOST+" Subiendo fichero con cambios:"+FILE+ENTER_KEY);
@@ -246,6 +251,63 @@ public class ThreadServer implements ServerListener {
     
     }
     
+    /**
+     * Procesa el classath del fichero sujeto de edición
+     * @param text fichero a editar
+     * @return Devuelve fichero procesado el CLASSPATH conforme al criterio establecido
+     */
+    public String procesaClassPath(String text) {
+        String cp="";
+        String libreriasComunes="";
+        String libreriasEspecificas="";
+        if (text.contains("CLASSPATH_COMMON=")) {
+            int indice_INI_CP_COMMON = text.indexOf("CLASSPATH_COMMON=");
+            cp = text.substring(indice_INI_CP_COMMON+17);
+            StringTokenizer st = new StringTokenizer(cp, "\n");
+            cp = st.nextToken();
+            int indice_FIN_CP = indice_INI_CP_COMMON + cp.length();
+            StringTokenizer twop = new StringTokenizer(cp, ":");
+            boolean CPyaIniciado = false;
+            while (twop.hasMoreElements()) {
+                String libreria=twop.nextToken();
+                if (libreria.startsWith("$")) {
+                    String libreriasGrupo = abreLibreriasComunes(RUTA_AMBITOS+"libreriasForms.properties",libreria.substring(1));
+                    if (CPyaIniciado) { libreriasComunes+=":";}
+                    libreriasComunes+=libreriasGrupo;
+                    CPyaIniciado=true;
+                } 
+            }
+        }
+        if (text.contains("CLASSPATH_CUSTOM=")) {
+            int indice_INI = text.indexOf("CLASSPATH_CUSTOM=");
+            cp = text.substring(indice_INI+17);
+            StringTokenizer st = new StringTokenizer(cp, "\n");
+            cp = st.nextToken();
+            int indice_FIN = indice_INI + cp.length();
+            StringTokenizer twop = new StringTokenizer(cp, ":");
+            boolean CPyaIniciado = false;
+            while (twop.hasMoreElements()) {
+                String libreria=twop.nextToken();
+                    if (CPyaIniciado) { libreriasEspecificas+=":";}
+                    libreriasEspecificas+=libreria;
+                    CPyaIniciado=true;    
+            }
+        }
+        if (text.contains("CLASSPATH=")) {
+            String cp_procesado="";
+            int indice_INI_CP = text.indexOf("CLASSPATH=");
+            cp = text.substring(indice_INI_CP+10);
+            StringTokenizer st = new StringTokenizer(cp, "\n");
+            cp = st.nextToken();
+            int indice_FIN_CP = indice_INI_CP + cp.length();
+            if (!(libreriasComunes.equals("")) && !(libreriasEspecificas.equals(""))) {           
+                text = text.substring(0,indice_INI_CP)+"CLASSPATH="+libreriasComunes+(libreriasEspecificas.equals("")?"":":"+libreriasEspecificas)+text.substring(indice_FIN_CP+10);
+            }
+        }
+        return text;
+    }
+    
+                    
     /**
      * Hace una copia de seguridad del fichero en la carpeta  $ASA_CONF/backup
      */
@@ -343,6 +405,46 @@ public class ThreadServer implements ServerListener {
         
     }
     
+    
+    public String abreLibreriasComunes(String remoteFile, String grupoLib) {
+        String libreriasDelGrupo="";
+        try
+            {
+                JSch jsch = new JSch();
+                Session session = jsch.getSession(USERNAME, HOST, PORT);
+                session.setPassword(PASSWORD);
+                session.setConfig("StrictHostKeyChecking", "no");
+                System.out.println("Establishing Connection...");
+                session.connect();
+                System.out.println("Connection established.");
+                System.out.println("Creating SFTP Channel.");
+                ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
+                sftpChannel.connect();
+                System.out.println("SFTP Channel created.");
+                InputStream out= sftpChannel.get(remoteFile);
+                Properties prop = new Properties();
+                try {
+                    prop.load(out);
+                    libreriasDelGrupo = prop.getProperty(grupoLib);
+
+                } catch (IOException ex) {
+                    Logger.getLogger(ThreadServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                sftpChannel.disconnect();
+                session.disconnect();
+            }
+            catch(JSchException | SftpException e)
+            {
+                System.out.println(e);
+                escribeLog(e.getMessage());   
+                ERROR++;
+            }
+        return libreriasDelGrupo;
+    
+    }
+    
+    
+    
     /**
      * Coge el fichero remoto por sftp
      * @param remoteFile nombre del fichero
@@ -403,7 +505,6 @@ public class ThreadServer implements ServerListener {
             RUTA_FORMSWEB = "/srv_apl/forms12c/middleware/user_projects/domains/frsdomain/config/fmwconfig/servers/WLS_FORMS/applications/formsapp_12.2.1/config/";
             RUTA_TNSNAMES = "/srv_apl/forms12c/middleware/network/admin/";
             RUTA_WEBUTIL = "/srv_apl/forms12c/middleware/user_projects/domains/frsdomain/config/fmwconfig/components/FORMS/instances/forms1/server/";
-        
         }
         
     }
