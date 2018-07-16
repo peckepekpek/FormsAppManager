@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 public class ThreadServer implements ServerListener {
     
     public static String USERNAME = "";
-    public static String HOST = "";
+    public String HOST = "";
     public static final int PORT = 22;
     public static String PASSWORD = "";
     public String FILE = ""; 
@@ -295,13 +295,15 @@ public class ThreadServer implements ServerListener {
         }
         if (text.contains("CLASSPATH=")) {
             String cp_procesado="";
+            String separador="";
             int indice_INI_CP = text.indexOf("CLASSPATH=");
             cp = text.substring(indice_INI_CP+10);
             StringTokenizer st = new StringTokenizer(cp, "\n");
             cp = st.nextToken();
             int indice_FIN_CP = indice_INI_CP + cp.length();
-            if (!(libreriasComunes.equals("")) && !(libreriasEspecificas.equals(""))) {           
-                text = text.substring(0,indice_INI_CP)+"CLASSPATH="+libreriasComunes+(libreriasEspecificas.equals("")?"":":"+libreriasEspecificas)+text.substring(indice_FIN_CP+10);
+            if (!(libreriasComunes.equals("")) || !(libreriasEspecificas.equals(""))) {
+                if (!libreriasComunes.equals("")&&!(libreriasEspecificas.equals(""))) { separador=":"; }
+                text = text.substring(0,indice_INI_CP)+"CLASSPATH="+libreriasComunes+separador+libreriasEspecificas+text.substring(indice_FIN_CP+10);
             }
         }
         return text;
