@@ -158,10 +158,13 @@ public class ThreadServer implements ServerListener {
      */
     public void abreFichero () {      
         CLASSPATH_ENV="";
+        informaEstado("Haciendo una precopia del fichero:"+FILE+ENTER_KEY);
         preCopiaFichero();
+        informaEstado("Cambiando propietario del fichero:"+FILE+ENTER_KEY);
         cambiaPropietarioDownload();
         informaEstado("Abriendo fichero:"+FILE+ENTER_KEY);
         cogeFichero("/tmp/"+FILE);
+        informaEstado("Borrando temporal:"+FILE+ENTER_KEY);
         borraTemporal();
         informaEstado("Fin de proceso. Fichero abierto:"+FILE+ENTER_KEY);
     }
@@ -374,6 +377,7 @@ public class ThreadServer implements ServerListener {
                 session.setConfig("StrictHostKeyChecking", "no");
 //                informaEstado("Establishing Connection...");
                 session.connect();
+                System.out.println("Connection established with USER."+USERNAME+" Comando a ejecutar:"+command);
 //                informaEstado("Connection established with USER."+USERNAME+" Comando a ejecutar:"+command);
                 // Abrimos un canal SSH. Es como abrir una consola.
                 ChannelExec channelExec = (ChannelExec) session.

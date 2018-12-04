@@ -71,14 +71,6 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         OutputPanel = new javax.swing.JPanel();
         jScrollPane = new javax.swing.JScrollPane();
         logTextArea = new javax.swing.JTextArea();
-        AmbitoPanel = new javax.swing.JPanel();
-        filePanel = new javax.swing.JPanel();
-        newAmbitoPanel = new javax.swing.JPanel();
-        newAmbitoButton = new javax.swing.JButton();
-        newAmbitoTF = new javax.swing.JTextField();
-        editButtonPanel = new javax.swing.JPanel();
-        editFileButton = new javax.swing.JButton();
-        state = new javax.swing.JLabel();
         DistribucionPanel = new javax.swing.JPanel();
         DistributionPanelForms11 = new javax.swing.JPanel();
         desa_f11_rb = new javax.swing.JRadioButton();
@@ -92,6 +84,15 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         pro_f12_rb = new javax.swing.JRadioButton();
         versionLabel = new javax.swing.JLabel();
         versionPanel = new javax.swing.JPanel();
+        AmbitosScrollPanel = new javax.swing.JScrollPane();
+        AmbitoPanel = new javax.swing.JPanel();
+        filePanel = new javax.swing.JPanel();
+        newAmbitoPanel = new javax.swing.JPanel();
+        newAmbitoButton = new javax.swing.JButton();
+        newAmbitoTF = new javax.swing.JTextField();
+        editButtonPanel = new javax.swing.JPanel();
+        editFileButton = new javax.swing.JButton();
+        state = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Forms Manager");
@@ -129,7 +130,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
                     .addComponent(editorScrollPanel)
                     .addGroup(EditorPanelLayout.createSequentialGroup()
                         .addComponent(guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(DistribuirButton)))
                 .addContainerGap())
         );
@@ -137,7 +138,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             EditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EditorPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(editorScrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                .addComponent(editorScrollPanel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(EditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DistribuirButton)
@@ -231,7 +232,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         OutputPanel.setLayout(OutputPanelLayout);
         OutputPanelLayout.setHorizontalGroup(
             OutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(OutputPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OutputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane)
                 .addContainerGap())
@@ -241,82 +242,6 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             .addGroup(OutputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane)
-                .addContainerGap())
-        );
-
-        AmbitoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ámbitos"));
-        AmbitoPanel.setToolTipText("Selección");
-
-        filePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        filePanel.setLayout(new javax.swing.BoxLayout(filePanel, javax.swing.BoxLayout.LINE_AXIS));
-
-        newAmbitoPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        newAmbitoPanel.setLayout(new javax.swing.BoxLayout(newAmbitoPanel, javax.swing.BoxLayout.X_AXIS));
-
-        newAmbitoButton.setText("Crear nuevo ámbito:");
-        newAmbitoButton.setEnabled(false);
-        newAmbitoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newAmbitoButtonActionPerformed(evt);
-            }
-        });
-        newAmbitoPanel.add(newAmbitoButton);
-
-        newAmbitoTF.setToolTipText("");
-        newAmbitoPanel.add(newAmbitoTF);
-
-        editFileButton.setText("Editar ámbito/fichero");
-        editFileButton.setEnabled(false);
-        editFileButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editFileButtonActionPerformed(evt);
-            }
-        });
-
-        state.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gva/asa/forms/resources/green_bole.png"))); // NOI18N
-
-        javax.swing.GroupLayout editButtonPanelLayout = new javax.swing.GroupLayout(editButtonPanel);
-        editButtonPanel.setLayout(editButtonPanelLayout);
-        editButtonPanelLayout.setHorizontalGroup(
-            editButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(editButtonPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(editFileButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(state)
-                .addContainerGap(57, Short.MAX_VALUE))
-        );
-        editButtonPanelLayout.setVerticalGroup(
-            editButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editButtonPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(editButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editFileButton)
-                    .addComponent(state))
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout AmbitoPanelLayout = new javax.swing.GroupLayout(AmbitoPanel);
-        AmbitoPanel.setLayout(AmbitoPanelLayout);
-        AmbitoPanelLayout.setHorizontalGroup(
-            AmbitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AmbitoPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(AmbitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AmbitoPanelLayout.createSequentialGroup()
-                        .addComponent(filePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addComponent(newAmbitoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editButtonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        AmbitoPanelLayout.setVerticalGroup(
-            AmbitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AmbitoPanelLayout.createSequentialGroup()
-                .addComponent(filePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(newAmbitoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -416,7 +341,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         );
 
         versionLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        versionLabel.setText("Versión 1.09");
+        versionLabel.setText("Versión 1.10");
         versionLabel.setToolTipText("");
 
         javax.swing.GroupLayout DistribucionPanelLayout = new javax.swing.GroupLayout(DistribucionPanel);
@@ -440,7 +365,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
                 .addComponent(DistributionPanelForms11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(versionLabel))
         );
 
@@ -455,6 +380,85 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             .addGap(0, 13, Short.MAX_VALUE)
         );
 
+        AmbitoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ámbitos"));
+        AmbitoPanel.setToolTipText("Selección");
+        AmbitoPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        filePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        filePanel.setLayout(new javax.swing.BoxLayout(filePanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        newAmbitoPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        newAmbitoPanel.setLayout(new javax.swing.BoxLayout(newAmbitoPanel, javax.swing.BoxLayout.X_AXIS));
+
+        newAmbitoButton.setText("Crear nuevo ámbito:");
+        newAmbitoButton.setEnabled(false);
+        newAmbitoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newAmbitoButtonActionPerformed(evt);
+            }
+        });
+        newAmbitoPanel.add(newAmbitoButton);
+
+        newAmbitoTF.setToolTipText("");
+        newAmbitoPanel.add(newAmbitoTF);
+
+        editFileButton.setText("Editar ámbito/fichero");
+        editFileButton.setEnabled(false);
+        editFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editFileButtonActionPerformed(evt);
+            }
+        });
+
+        state.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gva/asa/forms/resources/green_bole.png"))); // NOI18N
+
+        javax.swing.GroupLayout editButtonPanelLayout = new javax.swing.GroupLayout(editButtonPanel);
+        editButtonPanel.setLayout(editButtonPanelLayout);
+        editButtonPanelLayout.setHorizontalGroup(
+            editButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editButtonPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(editFileButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(state)
+                .addContainerGap(140, Short.MAX_VALUE))
+        );
+        editButtonPanelLayout.setVerticalGroup(
+            editButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editButtonPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(editButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editFileButton)
+                    .addComponent(state))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout AmbitoPanelLayout = new javax.swing.GroupLayout(AmbitoPanel);
+        AmbitoPanel.setLayout(AmbitoPanelLayout);
+        AmbitoPanelLayout.setHorizontalGroup(
+            AmbitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AmbitoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(AmbitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AmbitoPanelLayout.createSequentialGroup()
+                        .addComponent(filePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(newAmbitoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editButtonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        AmbitoPanelLayout.setVerticalGroup(
+            AmbitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AmbitoPanelLayout.createSequentialGroup()
+                .addComponent(filePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newAmbitoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        AmbitosScrollPanel.setViewportView(AmbitoPanel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -464,16 +468,14 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(EntornoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(AmbitoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(EditorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(OutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(versionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DistribucionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AmbitosScrollPanel))
+                    .addComponent(OutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(EditorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(versionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(DistribucionPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -482,14 +484,18 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(EditorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AmbitoPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(EntornoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(EntornoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AmbitosScrollPanel))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(OutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(DistribucionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(versionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(DistribucionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(versionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(OutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -799,6 +805,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AmbitoPanel;
+    private javax.swing.JScrollPane AmbitosScrollPanel;
     private javax.swing.JButton ConsultaAmbitos;
     private javax.swing.JPanel DistribucionPanel;
     private javax.swing.JButton DistribuirButton;
