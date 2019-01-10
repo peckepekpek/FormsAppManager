@@ -60,14 +60,15 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         editorScrollPanel = new javax.swing.JScrollPane();
         EditorTextArea = new javax.swing.JTextArea();
         EntornoPanel = new javax.swing.JPanel();
-        EntornosComboBox = new javax.swing.JComboBox<>();
-        ConsultaAmbitos = new javax.swing.JButton();
+        ServersPanel = new javax.swing.JPanel();
+        seleccionPanel = new javax.swing.JPanel();
         EntornosLabel = new javax.swing.JLabel();
-        UsernameTF = new javax.swing.JTextField();
+        EntornosComboBox = new javax.swing.JComboBox<>();
         UserLabel = new javax.swing.JLabel();
+        UsernameTF = new javax.swing.JTextField();
         PassLabel = new javax.swing.JLabel();
         PasswordF = new javax.swing.JPasswordField();
-        ServersPanel = new javax.swing.JPanel();
+        ConsultaAmbitos = new javax.swing.JButton();
         OutputPanel = new javax.swing.JPanel();
         jScrollPane = new javax.swing.JScrollPane();
         logTextArea = new javax.swing.JTextArea();
@@ -86,13 +87,12 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         versionPanel = new javax.swing.JPanel();
         AmbitosScrollPanel = new javax.swing.JScrollPane();
         AmbitoPanel = new javax.swing.JPanel();
-        filePanel = new javax.swing.JPanel();
-        newAmbitoPanel = new javax.swing.JPanel();
-        newAmbitoButton = new javax.swing.JButton();
-        newAmbitoTF = new javax.swing.JTextField();
         editButtonPanel = new javax.swing.JPanel();
         editFileButton = new javax.swing.JButton();
         state = new javax.swing.JLabel();
+        newAmbitoTF = new javax.swing.JTextField();
+        newAmbitoButton = new javax.swing.JButton();
+        filePanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Forms Manager");
@@ -138,7 +138,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             EditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EditorPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(editorScrollPanel)
+                .addComponent(editorScrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(EditorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DistribuirButton)
@@ -147,6 +147,13 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         );
 
         EntornoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Entorno"));
+
+        ServersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Servidores"));
+        ServersPanel.setLayout(new javax.swing.BoxLayout(ServersPanel, javax.swing.BoxLayout.Y_AXIS));
+
+        seleccionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Selección"));
+
+        EntornosLabel.setText("Seleccione entorno:");
 
         EntornosComboBox.setEditable(true);
         EntornosComboBox.setMaximumRowCount(9);
@@ -157,6 +164,14 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             }
         });
 
+        UserLabel.setText("Usuario:");
+
+        UsernameTF.setToolTipText("");
+
+        PassLabel.setText("Pass:");
+
+        PasswordF.setToolTipText("");
+
         ConsultaAmbitos.setText("Consultar");
         ConsultaAmbitos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,62 +179,62 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             }
         });
 
-        EntornosLabel.setText("Seleccione entorno:");
-
-        UsernameTF.setToolTipText("");
-
-        UserLabel.setText("Usuario:");
-
-        PassLabel.setText("Pass:");
-
-        PasswordF.setToolTipText("");
-
-        ServersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Servidores"));
-        ServersPanel.setLayout(new javax.swing.BoxLayout(ServersPanel, javax.swing.BoxLayout.Y_AXIS));
+        javax.swing.GroupLayout seleccionPanelLayout = new javax.swing.GroupLayout(seleccionPanel);
+        seleccionPanel.setLayout(seleccionPanelLayout);
+        seleccionPanelLayout.setHorizontalGroup(
+            seleccionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, seleccionPanelLayout.createSequentialGroup()
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addGroup(seleccionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ConsultaAmbitos)
+                    .addGroup(seleccionPanelLayout.createSequentialGroup()
+                        .addGroup(seleccionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(UserLabel)
+                            .addComponent(PassLabel)
+                            .addComponent(EntornosLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(seleccionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(EntornosComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(UsernameTF)
+                            .addComponent(PasswordF))))
+                .addContainerGap())
+        );
+        seleccionPanelLayout.setVerticalGroup(
+            seleccionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(seleccionPanelLayout.createSequentialGroup()
+                .addGroup(seleccionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EntornosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EntornosLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(seleccionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(UsernameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UserLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(seleccionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PassLabel)
+                    .addComponent(PasswordF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ConsultaAmbitos))
+        );
 
         javax.swing.GroupLayout EntornoPanelLayout = new javax.swing.GroupLayout(EntornoPanel);
         EntornoPanel.setLayout(EntornoPanelLayout);
         EntornoPanelLayout.setHorizontalGroup(
             EntornoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EntornoPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(EntornoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ConsultaAmbitos)
-                    .addGroup(EntornoPanelLayout.createSequentialGroup()
-                        .addGroup(EntornoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(PassLabel)
-                            .addComponent(EntornosLabel)
-                            .addComponent(UserLabel))
-                        .addGap(23, 23, 23)
-                        .addGroup(EntornoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(UsernameTF)
-                            .addComponent(EntornosComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(PasswordF))))
-                .addGap(19, 19, 19))
             .addGroup(EntornoPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ServersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(seleccionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ServersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                 .addContainerGap())
         );
         EntornoPanelLayout.setVerticalGroup(
             EntornoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EntornoPanelLayout.createSequentialGroup()
-                .addGroup(EntornoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EntornosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EntornosLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(EntornoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(UsernameTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UserLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(EntornoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PassLabel)
-                    .addComponent(PasswordF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ConsultaAmbitos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ServersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(EntornoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(seleccionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ServersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         OutputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro - Log"));
@@ -239,9 +254,9 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         );
         OutputPanelLayout.setVerticalGroup(
             OutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(OutputPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OutputPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -282,7 +297,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
                 .addGroup(DistributionPanelForms11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pro_f11_int_rb)
                     .addComponent(pro_f11_ext_rb))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         DistributionPanelForms11Layout.setVerticalGroup(
             DistributionPanelForms11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,35 +352,38 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
                     .addComponent(desa_f12_rb)
                     .addComponent(pre_f12_rb)
                     .addComponent(pro_f12_rb))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         versionLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        versionLabel.setText("Versión 1.10");
+        versionLabel.setText("Versión 1.11");
         versionLabel.setToolTipText("");
 
         javax.swing.GroupLayout DistribucionPanelLayout = new javax.swing.GroupLayout(DistribucionPanel);
         DistribucionPanel.setLayout(DistribucionPanelLayout);
         DistribucionPanelLayout.setHorizontalGroup(
             DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DistribucionPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(DistributionPanelForms11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(7, 7, 7))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DistribucionPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(versionLabel))
+            .addGroup(DistribucionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DistribucionPanelLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(7, 7, 7))
+                    .addGroup(DistribucionPanelLayout.createSequentialGroup()
+                        .addComponent(DistributionPanelForms11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         DistribucionPanelLayout.setVerticalGroup(
             DistribucionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DistribucionPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(DistributionPanelForms11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(versionLabel))
         );
 
@@ -373,7 +391,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         versionPanel.setLayout(versionPanelLayout);
         versionPanelLayout.setHorizontalGroup(
             versionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 548, Short.MAX_VALUE)
+            .addGap(0, 463, Short.MAX_VALUE)
         );
         versionPanelLayout.setVerticalGroup(
             versionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,23 +402,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         AmbitoPanel.setToolTipText("Selección");
         AmbitoPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        filePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        filePanel.setLayout(new javax.swing.BoxLayout(filePanel, javax.swing.BoxLayout.LINE_AXIS));
-
-        newAmbitoPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        newAmbitoPanel.setLayout(new javax.swing.BoxLayout(newAmbitoPanel, javax.swing.BoxLayout.X_AXIS));
-
-        newAmbitoButton.setText("Crear nuevo ámbito:");
-        newAmbitoButton.setEnabled(false);
-        newAmbitoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newAmbitoButtonActionPerformed(evt);
-            }
-        });
-        newAmbitoPanel.add(newAmbitoButton);
-
-        newAmbitoTF.setToolTipText("");
-        newAmbitoPanel.add(newAmbitoTF);
+        editButtonPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         editFileButton.setText("Editar ámbito/fichero");
         editFileButton.setEnabled(false);
@@ -411,6 +413,20 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
         });
 
         state.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gva/asa/forms/resources/green_bole.png"))); // NOI18N
+        state.setText("Estado");
+
+        newAmbitoTF.setToolTipText("");
+
+        newAmbitoButton.setText("Crear nuevo ámbito:");
+        newAmbitoButton.setEnabled(false);
+        newAmbitoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newAmbitoButtonActionPerformed(evt);
+            }
+        });
+
+        filePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        filePanel.setLayout(new javax.swing.BoxLayout(filePanel, javax.swing.BoxLayout.LINE_AXIS));
 
         javax.swing.GroupLayout editButtonPanelLayout = new javax.swing.GroupLayout(editButtonPanel);
         editButtonPanel.setLayout(editButtonPanelLayout);
@@ -421,16 +437,32 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
                 .addComponent(editFileButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(state)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(newAmbitoButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newAmbitoTF, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(editButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(editButtonPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(filePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         editButtonPanelLayout.setVerticalGroup(
             editButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editButtonPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(editButtonPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(editButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editFileButton)
-                    .addComponent(state))
-                .addContainerGap())
+                    .addComponent(state)
+                    .addComponent(newAmbitoTF, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newAmbitoButton))
+                .addContainerGap(208, Short.MAX_VALUE))
+            .addGroup(editButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(editButtonPanelLayout.createSequentialGroup()
+                    .addGap(46, 46, 46)
+                    .addComponent(filePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout AmbitoPanelLayout = new javax.swing.GroupLayout(AmbitoPanel);
@@ -439,22 +471,14 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             AmbitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AmbitoPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(AmbitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AmbitoPanelLayout.createSequentialGroup()
-                        .addComponent(filePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addComponent(newAmbitoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editButtonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(editButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         AmbitoPanelLayout.setVerticalGroup(
             AmbitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AmbitoPanelLayout.createSequentialGroup()
-                .addComponent(filePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(newAmbitoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 345, Short.MAX_VALUE))
         );
 
         AmbitosScrollPanel.setViewportView(AmbitoPanel);
@@ -466,16 +490,14 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(EntornoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AmbitosScrollPanel))
-                    .addComponent(OutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(OutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(EditorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(versionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(DistribucionPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(EntornoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(versionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AmbitosScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(DistribucionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -483,18 +505,19 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EditorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(EntornoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AmbitosScrollPanel))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(12, 12, 12)
+                        .addComponent(AmbitosScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(DistribucionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(versionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(OutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(EntornoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EditorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(OutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
 
@@ -832,7 +855,6 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTextArea logTextArea;
     private javax.swing.JButton newAmbitoButton;
-    private javax.swing.JPanel newAmbitoPanel;
     private javax.swing.JTextField newAmbitoTF;
     private javax.swing.JRadioButton pre_f11_ext_rb;
     private javax.swing.JRadioButton pre_f11_int_rb;
@@ -840,6 +862,7 @@ public class EditorFrame extends javax.swing.JFrame implements ServerListener {
     private javax.swing.JRadioButton pro_f11_ext_rb;
     private javax.swing.JRadioButton pro_f11_int_rb;
     private javax.swing.JRadioButton pro_f12_rb;
+    private javax.swing.JPanel seleccionPanel;
     private javax.swing.JLabel state;
     private javax.swing.JLabel versionLabel;
     private javax.swing.JPanel versionPanel;
